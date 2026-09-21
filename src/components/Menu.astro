@@ -10,41 +10,19 @@ import { formatPrice } from "../utils/format";
   >
     <!-- Section Header & Deck Controls -->
     <div
-      class="flex items-end justify-between mb-[clamp(0.375rem,1svh,1rem)] gap-2"
+      class="mb-[clamp(0.375rem,1svh,1rem)]"
       data-animate
     >
-      <div>
-        <span
-          class="font-label-md text-xs sm:text-label-md tracking-widest text-primary uppercase block mb-1 sm:mb-1.5 font-semibold"
-        >
-          SELECCIÓN DE TEMPORADA
-        </span>
-        <h2
-          class="font-headline-xl text-fluid-headline text-on-surface font-bold leading-tight"
-        >
-          Nuestro menú destacado
-        </h2>
-      </div>
-
-      <!-- Accessible Deck Navigation for horizontal scroll (<lg) -->
-      <div class="flex lg:hidden items-center gap-1.5 shrink-0">
-        <button
-          type="button"
-          id="menu-prev-btn"
-          aria-label="Ver platos anteriores"
-          class="w-9 h-9 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface hover:text-primary flex items-center justify-center transition-all cursor-pointer active:scale-95 shadow-xs"
-        >
-          <span class="material-symbols-outlined text-[18px]">chevron_left</span>
-        </button>
-        <button
-          type="button"
-          id="menu-next-btn"
-          aria-label="Ver platos siguientes"
-          class="w-9 h-9 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface hover:text-primary flex items-center justify-center transition-all cursor-pointer active:scale-95 shadow-xs"
-        >
-          <span class="material-symbols-outlined text-[18px]">chevron_right</span>
-        </button>
-      </div>
+      <span
+        class="font-label-md text-xs sm:text-label-md tracking-widest text-primary uppercase block mb-1 sm:mb-1.5 font-semibold"
+      >
+        SELECCIÓN DE TEMPORADA
+      </span>
+      <h2
+        class="font-headline-xl text-fluid-headline text-on-surface font-bold leading-tight"
+      >
+        Nuestro menú destacado
+      </h2>
     </div>
 
     <!-- Category Filter Tabs (Accessible Tablist) -->
@@ -78,7 +56,7 @@ import { formatPrice } from "../utils/format";
     <!-- Cards: Horizontal Swipe Deck on Mobile (<lg), Responsive 4 Columns on Desktop (lg+) -->
     <div
       id="menu-grid"
-      class="flex lg:grid lg:grid-cols-4 gap-[clamp(0.75rem,1.6svh,1.5rem)] -mx-gutter-mobile px-gutter-mobile lg:mx-0 lg:px-0 overflow-x-auto overflow-y-hidden no-scrollbar snap-x snap-mandatory lg:snap-none pt-2 pb-3 lg:pt-0 lg:pb-0 items-stretch select-none touch-auto scroll-smooth"
+      class="flex lg:grid lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-[clamp(0.75rem,1.6svh,1.5rem)] overflow-x-auto overflow-y-hidden no-scrollbar snap-x snap-mandatory lg:snap-none pt-2 pb-3 lg:pt-0 lg:pb-0 items-stretch select-none touch-auto scroll-smooth"
       tabindex="0"
       role="region"
       aria-label="Catálogo de platos del menú"
@@ -87,7 +65,7 @@ import { formatPrice } from "../utils/format";
         menuItems.map((item, i) => (
           <div
             draggable="false"
-            class="menu-item-card w-[74vw] max-w-[275px] sm:w-68 md:w-72 lg:w-auto shrink-0 lg:shrink snap-start lg:snap-align-none group bg-surface-container-lowest border border-outline-variant/30 hover:border-primary/40 rounded-2xl overflow-hidden shadow-[0_4px_20px_-2px_rgba(43,33,26,0.06)] hover:shadow-[0_16px_36px_-4px_rgba(43,33,26,0.14)] transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between select-none"
+            class="menu-item-card w-[72vw] max-w-65 sm:w-68 md:w-72 lg:w-auto shrink-0 lg:shrink snap-start lg:snap-align-none group bg-surface-container-lowest border border-outline-variant/30 hover:border-primary/40 rounded-2xl overflow-hidden shadow-[0_4px_20px_-2px_rgba(43,33,26,0.06)] hover:shadow-[0_16px_36px_-4px_rgba(43,33,26,0.14)] transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between select-none"
             data-category={item.category}
             data-animate
             style={`transition-delay: ${i * 70}ms`}
@@ -143,65 +121,57 @@ import { formatPrice } from "../utils/format";
       }
     </div>
 
-    <!-- Indicadores y Controles Táctiles para Móvil (<lg) -->
+        <!-- Accessible Carousel Navigation Controls (Mobile only) -->
     <div
-      id="menu-mobile-controls"
-      class="flex lg:hidden items-center justify-between gap-2 pt-1 px-1 shrink-0"
+      id="menu-controls"
+      class="flex lg:hidden items-center justify-center gap-3 pt-2"
       role="group"
-      aria-label="Controles del menú en móvil"
+      aria-label="Navegación del menú"
     >
-      <div class="flex items-center gap-1.5 text-xs text-tertiary">
-        <span class="material-symbols-outlined text-[15px] text-primary animate-swipe-nudge">swipe_left</span>
-        <span class="font-label-sm text-[11px] sm:text-xs">Desliza para ver más</span>
+      <button
+        type="button"
+        id="menu-prev-btn"
+        aria-label="Ver plato anterior"
+        aria-controls="menu-grid"
+        class="w-8 h-8 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface hover:text-primary hover:border-primary/40 flex items-center justify-center transition-all cursor-pointer active:scale-95 shadow-xs"
+      >
+        <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+      </button>
+
+      <!-- Dot Indicators -->
+      <div
+        role="tablist"
+        aria-label="Selector de platos"
+        class="flex items-center gap-1.5"
+      >
+        {
+          menuItems.map((_, i) => (
+            <button
+              type="button"
+              role="tab"
+              id={`menu-dot-${i}`}
+              aria-selected={i === 0 ? "true" : "false"}
+              aria-label={`Ver plato ${i + 1} de ${menuItems.length}`}
+              data-menu-dot-index={i}
+              class={`menu-dot h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                i === 0
+                  ? "w-6 bg-primary"
+                  : "w-2.5 bg-outline-variant/40 hover:bg-outline-variant"
+              }`}
+            />
+          ))
+        }
       </div>
 
-      <div class="flex items-center gap-2">
-        <!-- Dots indicadores de platos -->
-        <div
-          id="menu-dots-container"
-          role="tablist"
-          aria-label="Selector de platos"
-          class="flex items-center gap-1.5"
-        >
-          {
-            menuItems.map((_, i) => (
-              <button
-                type="button"
-                role="tab"
-                id={`menu-dot-${i}`}
-                aria-selected={i === 0 ? "true" : "false"}
-                aria-label={`Ver plato ${i + 1} de ${menuItems.length}`}
-                data-menu-dot-index={i}
-                class={`menu-dot h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  i === 0
-                    ? "w-5 bg-primary"
-                    : "w-2 bg-outline-variant/40 hover:bg-outline-variant"
-                }`}
-              />
-            ))
-          }
-        </div>
-
-        <!-- Botones inferiores de avance -->
-        <div class="flex items-center gap-1">
-          <button
-            type="button"
-            id="menu-bottom-prev-btn"
-            aria-label="Ver plato anterior"
-            class="w-8 h-8 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface hover:text-primary flex items-center justify-center transition-all cursor-pointer active:scale-95 shadow-xs"
-          >
-            <span class="material-symbols-outlined text-[16px]">chevron_left</span>
-          </button>
-          <button
-            type="button"
-            id="menu-bottom-next-btn"
-            aria-label="Ver plato siguiente"
-            class="w-8 h-8 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface hover:text-primary flex items-center justify-center transition-all cursor-pointer active:scale-95 shadow-xs"
-          >
-            <span class="material-symbols-outlined text-[16px]">chevron_right</span>
-          </button>
-        </div>
-      </div>
+      <button
+        type="button"
+        id="menu-next-btn"
+        aria-label="Ver plato siguiente"
+        aria-controls="menu-grid"
+        class="w-8 h-8 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface hover:text-primary hover:border-primary/40 flex items-center justify-center transition-all cursor-pointer active:scale-95 shadow-xs"
+      >
+        <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+      </button>
     </div>
 
     <!-- Disclaimer Legal y Moneda Local (I18N-02 / BCV) -->
@@ -311,11 +281,11 @@ import { formatPrice } from "../utils/format";
           const isSelected = i === (firstVisibleIdx >= 0 ? firstVisibleIdx : 0);
           d.setAttribute("aria-selected", isSelected ? "true" : "false");
           if (isSelected) {
-            d.classList.add("w-5", "bg-primary");
-            d.classList.remove("w-2", "bg-outline-variant/40");
+            d.classList.add("w-6", "bg-primary");
+            d.classList.remove("w-2.5", "bg-outline-variant/40");
           } else {
-            d.classList.remove("w-5", "bg-primary");
-            d.classList.add("w-2", "bg-outline-variant/40");
+            d.classList.remove("w-6", "bg-primary");
+            d.classList.add("w-2.5", "bg-outline-variant/40");
           }
         });
       });
@@ -357,47 +327,50 @@ import { formatPrice } from "../utils/format";
 
   function setupMenuDeckNavigation() {
     const grid = document.getElementById("menu-grid");
-    const topPrevBtn = document.getElementById("menu-prev-btn");
-    const topNextBtn = document.getElementById("menu-next-btn");
-    const bottomPrevBtn = document.getElementById("menu-bottom-prev-btn");
-    const bottomNextBtn = document.getElementById("menu-bottom-next-btn");
+    const prevBtn = document.getElementById("menu-prev-btn");
+    const nextBtn = document.getElementById("menu-next-btn");
     const dots = document.querySelectorAll<HTMLButtonElement>(".menu-dot");
     const cards = document.querySelectorAll<HTMLElement>(".menu-item-card");
 
     if (!grid || cards.length === 0) return;
 
-    function getScrollStep() {
-      const firstCard = grid?.querySelector<HTMLElement>(".menu-item-card");
-      return firstCard ? firstCard.offsetWidth + 14 : 280;
-    }
+    let currentIndex = 0;
 
     function updateDots(index: number) {
       dots.forEach((dot, i) => {
         const isSelected = i === index;
         dot.setAttribute("aria-selected", isSelected ? "true" : "false");
         if (isSelected) {
-          dot.classList.add("w-5", "bg-primary");
-          dot.classList.remove("w-2", "bg-outline-variant/40");
+          dot.classList.add("w-6", "bg-primary");
+          dot.classList.remove("w-2.5", "bg-outline-variant/40");
         } else {
-          dot.classList.remove("w-5", "bg-primary");
-          dot.classList.add("w-2", "bg-outline-variant/40");
+          dot.classList.remove("w-6", "bg-primary");
+          dot.classList.add("w-2.5", "bg-outline-variant/40");
         }
       });
+      currentIndex = index;
     }
 
-    function scrollPrev() {
-      grid.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
+    function scrollToIndex(index: number) {
+      if (window.innerWidth >= 1024) return;
+      const visibleCards = Array.from(cards).filter((c) => c.style.display !== "none");
+      if (visibleCards.length === 0) return;
+      if (index < 0) index = visibleCards.length - 1;
+      if (index >= visibleCards.length) index = 0;
+      const targetCard = visibleCards[index];
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+        const originalIdx = Array.from(cards).indexOf(targetCard);
+        updateDots(originalIdx);
+      }
     }
 
-    function scrollNext() {
-      grid.scrollBy({ left: getScrollStep(), behavior: "smooth" });
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => scrollToIndex(currentIndex - 1));
     }
-
-    // Connect top and bottom controls
-    if (topPrevBtn) topPrevBtn.addEventListener("click", scrollPrev);
-    if (topNextBtn) topNextBtn.addEventListener("click", scrollNext);
-    if (bottomPrevBtn) bottomPrevBtn.addEventListener("click", scrollPrev);
-    if (bottomNextBtn) bottomNextBtn.addEventListener("click", scrollNext);
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => scrollToIndex(currentIndex + 1));
+    }
 
     // Dot click triggers smooth scroll to selected card
     dots.forEach((dot) => {
@@ -435,12 +408,13 @@ import { formatPrice } from "../utils/format";
 
     // Keyboard arrow navigation
     grid.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (window.innerWidth >= 1024) return;
       if (e.key === "ArrowLeft") {
         e.preventDefault();
-        scrollPrev();
+        scrollToIndex(currentIndex - 1);
       } else if (e.key === "ArrowRight") {
         e.preventDefault();
-        scrollNext();
+        scrollToIndex(currentIndex + 1);
       }
     });
   }

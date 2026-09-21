@@ -34,7 +34,7 @@ export const statsSectionData: StatsSection = {
       accent: 'primary',
     },
     {
-      label: 'Propuesta Viva',
+      label: 'Propuesta',
       value: '35+',
       numericTarget: 35,
       suffix: '+',

@@ -5,10 +5,10 @@ import heroImg from "../assets/terroso-ambiente-hero.jpeg";
 
 <section
   id="inicio"
-  class="relative w-full bg-surface-container overflow-x-clip min-h-[calc(100svh-var(--header-height))] flex flex-col justify-between pt-[clamp(0.5rem,1.5svh,1.5rem)] pb-0"
+  class="relative w-full bg-surface-container overflow-x-clip section-screen-fit flex flex-col justify-between pt-[clamp(0.5rem,1.5svh,1.5rem)] pb-0!"
 >
   <div
-    class="max-w-7xl mx-auto px-gutter-mobile md:px-margin-tablet lg:px-margin w-full flex flex-col justify-center grow py-[clamp(0.25rem,1svh,1rem)]"
+    class="site-container px-gutter-mobile md:px-margin-tablet lg:px-margin w-full flex flex-col justify-center grow py-[clamp(0.25rem,1svh,1rem)]"
   >
     <div
       class="grid grid-cols-1 md:grid-cols-12 gap-y-3 sm:gap-y-4 md:gap-x-8 lg:gap-x-12 items-center"
@@ -112,7 +112,7 @@ import heroImg from "../assets/terroso-ambiente-hero.jpeg";
         data-animate="slide-left"
       >
         <div
-          class="relative w-full max-w-95 sm:max-w-120 md:max-w-none rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(43,33,26,0.18)] max-h-[clamp(210px,46svh,440px)] aspect-4/3"
+          class="relative w-full max-w-95 sm:max-w-120 md:max-w-none 2xl:max-w-160 rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(43,33,26,0.18)] max-h-[clamp(210px,46svh,440px)] 2xl:max-h-130 aspect-4/3"
         >
           <Image
             alt="Ambiente cálido de Terroso Café en Altamira, Caracas, con barra de café de especialidad, mesas rústicas y abundante vegetación"
@@ -155,10 +155,13 @@ import heroImg from "../assets/terroso-ambiente-hero.jpeg";
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Indicador de Scroll / Desliza hacia abajo (Visible en pantallas con altura suficiente) -->
+  <!-- Anclaje Inferior: Indicador de scroll (solo escritorio) y ola decorativa hacia la franja informativa -->
+  <div class="w-full shrink-0 flex flex-col items-center mt-auto">
+    <!-- Indicador de Scroll / Desliza hacia abajo (Visible en computadoras y laptops; oculto en móvil y ultra-short) -->
     <div
-      class="hidden md:flex short:hidden flex-col items-center justify-center pt-2 sm:pt-3 pb-1 z-20 relative shrink-0"
+      class="hidden md:flex ultra-short:hidden flex-col items-center justify-center pb-2 sm:pb-3 z-20 relative shrink-0"
       data-animate="fade"
     >
       <a
@@ -181,20 +184,21 @@ import heroImg from "../assets/terroso-ambiente-hero.jpeg";
         </div>
       </a>
     </div>
-  </div>
 
-  <!-- Wave Divider: conecta suavemente con la franja de origen -->
-  <div
-    class="w-full leading-none text-secondary overflow-hidden -mb-px shrink-0 mt-1 sm:mt-2"
-  >
-    <svg
-      class="relative block w-full h-4 sm:h-6 md:h-8 lg:h-10 short:h-4 ultra-short:h-3"
-      viewBox="0 0 1200 120"
-      preserveAspectRatio="none"
+    <!-- Wave Divider: conecta suavemente con la franja de origen -->
+    <div
+      class="w-full leading-none text-secondary overflow-hidden -mb-px shrink-0 select-none pointer-events-none"
     >
-      <path
-        d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z"
-        fill="currentColor"></path>
-    </svg>
+      <svg
+        class="relative block w-full h-4 sm:h-6 md:h-8 lg:h-10 short:h-4 ultra-short:h-3"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    </div>
   </div>
 </section>

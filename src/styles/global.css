@@ -142,7 +142,7 @@
 
 /* ── Custom Viewport Variants & Uniform Section Padding ─────── */
 @custom-variant short (@media (max-height: 680px) and (min-width: 960px));
-@custom-variant ultra-short (@media (max-height: 540px) and (min-width: 960px));
+@custom-variant ultra-short (@media (max-height: 540px));
 
 /* ── Global Resets & Base ───────────────────────────────── */
 :root {
@@ -408,6 +408,44 @@
     position: relative;
   }
 
+  /* Specific override for Hero (#inicio): bottom wave divider must sit completely flush with InfoStrip */
+  #inicio.section-screen-fit,
+  #inicio {
+    padding-bottom: 0 !important;
+  }
+
+  /* Vertical / Portrait Screens (e.g. 1080x1920 vertical monitors, tablets/phones portrait):
+     Do NOT force 100vh of vertical height per section. Sections flow with natural height and balanced padding. */
+  @media (orientation: portrait), (max-aspect-ratio: 1/1) {
+    .section-screen-fit {
+      min-height: auto !important;
+      height: auto !important;
+      justify-content: flex-start !important;
+      padding-top: clamp(2.5rem, 5svh, 5rem) !important;
+      padding-bottom: clamp(2.5rem, 5svh, 5rem) !important;
+    }
+
+    #inicio.section-screen-fit,
+    #inicio {
+      padding-bottom: 0 !important;
+    }
+
+    .section-screen-fit > div {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+  }
+
+  /* On mobile phones, Hero (#inicio) preserves 100svh viewport fill so the wave rests at the bottom edge as in original design */
+  @media (max-width: 767px) {
+    #inicio.section-screen-fit,
+    #inicio {
+      min-height: calc(100svh - var(--header-height)) !important;
+      justify-content: space-between !important;
+      padding-bottom: 0 !important;
+    }
+  }
+
   /* Unified vertical padding in short screens (padY = 32px) */
   @media (max-height: 680px) and (min-width: 960px) {
     .section-screen-fit {
@@ -431,6 +469,20 @@
       height: auto;
       padding-top: 1.5rem;
       padding-bottom: 1.5rem;
+    }
+  }
+
+  /* ── Site Responsive Container (fluid expansion on >1366px monitors) ── */
+  .site-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+  }
+
+  @media (min-width: 1280px) {
+    .site-container {
+      max-width: clamp(80rem, 87vw, 105rem); /* 1280px at 1366px, scaling up to 1680px on 1920px+ */
     }
   }
 

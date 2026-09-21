@@ -1,33 +1,45 @@
-# ☕ Terroso Café & Restaurante
+# ☕ Terroso Café & Restaurante — Frontend Showcase & Demo
 
+[![Demo Showcase](https://img.shields.io/badge/Tipo-Demo_%2F_Portafolio_Frontend-F59E0B?style=flat-square)](#)
 [![Astro](https://img.shields.io/badge/Astro-5.0-BC52EE?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![WCAG](https://img.shields.io/badge/WCAG_2.2-AA_Compliant-2E7D32?style=flat-square)](https://www.w3.org/WAI/standards-guidelines/wcag/)
 [![SEO](https://img.shields.io/badge/SEO_Google-2026_Ready-EA4335?style=flat-square&logo=google&logoColor=white)](https://developers.google.com/search)
 
-Plataforma web oficial y catálogo gastronómico interactivo de **Terroso Café & Restaurante**, ubicado en la emblemática **Av. Luis Roche de Altamira (Caracas, Venezuela)**. Un espacio dedicado al café de especialidad de fincas andinas venezolanas, la panadería artesanal de fermentación lenta (masa madre) y la cocina de origen contemporánea.
-
-La web combina arquitectura de alto rendimiento generada estáticamente (SSG), diseño editorial de lujo inspirado en los tonos de la tierra y la arcilla (*Earthy Palette*), accesibilidad integral y un sistema de escalado proporcional capaz de adaptarse armónicamente desde teléfonos compactos hasta pantallas **Ultrawide 21:9 y monitores 4K UHD**.
+> [!NOTE]
+> **Proyecto Conceptual / Demo de Portafolio**: Este sitio web representa una demostración técnica de nivel Senior Frontend para un establecimiento gastronómico ficticio (**Terroso Café & Restaurante**). Fue concebido, diseñado y construido como pieza de exhibición para ilustrar soluciones reales a retos modernos de desarrollo web: arquitectura estática de máximo rendimiento (Astro 5 SSG), accesibilidad web estricta (**WCAG 2.2 AA**), escalado proporcional en pantallas de ultra-alta definición (**1080p, 2K, Ultrawide 21:9 y 4K**) y SEO técnico de vanguardia.
 
 ---
 
-## 🌟 Características Principales
+## 🎯 Propósito del Proyecto & Habilidades Demostradas
+
+Este proyecto sirve como caso de estudio práctico de ingeniería frontend, demostrando:
+
+1. **Arquitectura Zero-Bloat (Astro 5)**: Eliminación de frameworks de cliente pesados para una landing comercial. El 100% de la interactividad se resuelve mediante Vanilla JavaScript y TypeScript con Web APIs nativas, logrando puntuaciones de 100 en Core Web Vitals y carga casi instantánea.
+2. **Escalado Proporcional Dinámico (Layout High-DPI)**: Implementación de una estrategia CSS basada en la raíz `html { font-size: clamp(...) }` que hace crecer armónicamente tipografías, paddings, radios e iconos en resoluciones grandes (1920x1080 hasta 3840x2160 y pantallas ultra-panorámicas 21:9) sin romper la experiencia en móviles ni recurrir a deformaciones con `transform: scale()`.
+3. **Accesibilidad Real (WCAG 2.2 Nivel AA)**: Manejo riguroso de foco por teclado (*focus trap* en menú modal móvil con aislamiento `inert`, botones flotantes con `tabindex` dinámico, carrusel continuo con pausa por foco y pestañas WAI-ARIA navegables por flechas).
+4. **Diseño Editorial & Micro-interacciones de Lujo**: Identidad visual basada en una paleta de tonos tierra (*Earthy Palette*), tipografía combinada (*Playfair Display* + *Plus Jakarta Sans*) y cinemática continua a 55px/s con `requestAnimationFrame`.
+5. **Contextualización Comercial Local**: Modelado de flujos de negocio reales para hostelería: reservas interactivas con WhatsApp sin dependencias de backend, cálculo de horario local en vivo (`America/Caracas`) y cumplimiento de transparencia de precios (USD/VES a tasa oficial BCV).
+
+---
+
+## 🌟 Módulos y Características Clave
 
 ### 1. Experiencia Gastronómica & Reserva Interactiva
-- **Catálogo de Temporada con Filtros WAI-ARIA**: Pestañas de filtrado dinámico (Desayunos, Café, Brunch, Panadería) con soporte de teclado accesible (flechas horizontales `ArrowLeft` / `ArrowRight`, `Home` y `End`).
-- **Configurador de Reservas para WhatsApp**: Selector en tiempo real del número de comensales, momento del día (Brunch, Almuerzo, Tarde) y área deseada (Terraza Jardín o Salón Principal). Genera automáticamente un mensaje codificado para confirmación inmediata con el anfitrión.
-- **Horario Dinámico en Vivo (Zona Caracas)**: Cálculo automático del horario del día según la hora local de Venezuela (`America/Caracas`), indicando estado de apertura en tiempo real.
-- **Cumplimiento y Transparencia Comercial (BCV)**: Indicación explícita de precios referenciales en USD ($) con recepción de pagos en Bolívares (VES) a la tasa oficial del Banco Central de Venezuela, Pago Móvil y divisas en efectivo.
+- **Catálogo de Temporada con Filtros WAI-ARIA**: Pestañas de categorías (Desayunos, Café, Brunch, Panadería) con soporte de teclado accesible (flechas `ArrowLeft` / `ArrowRight`, `Home` y `End`).
+- **Configurador Dinámico para WhatsApp**: Selector en tiempo real del número de personas, momento del día y área (Terraza Jardín o Salón). Construye en el cliente una URL codificada para abrir un chat directo de reserva con el anfitrión.
+- **Horario Dinámico en Vivo (Zona Caracas)**: Cálculo automático del horario del día según la hora local de Venezuela (`America/Caracas`), indicando si el local ficticio se encuentra abierto o cerrado.
+- **Transparencia Comercial y Moneda Local (BCV)**: Indicación explícita de precios referenciales en USD ($) con recepción de pagos en Bolívares (VES) a la tasa oficial del Banco Central de Venezuela, Pago Móvil y divisas en efectivo.
 
 ### 2. Accesibilidad Avanzada (WCAG 2.2 AA)
-- **Navegación Móvil con Focus Trap**: Al abrir el menú desplegable en dispositivos táctiles, el contenido de fondo (`<main>` y `<footer>`) se aísla con el atributo `inert`, impidiendo la pérdida del tabulador y bloqueando el scroll de fondo.
-- **Botón "Volver Arriba" con Gestión de Foco**: El botón `#scroll-to-top` permanece con `tabindex="-1"` y `aria-hidden="true"` mientras está oculto, y solo entra en el orden de tabulación al hacerse visible (`scrollY > 400px`).
-- **Navegación por Anclas y Botón "Atrás"**: Los enlaces de sección (`#menu`, `#reservas`, `#historia`) actualizan el hash en la URL con `history.pushState` sin recargar la página, permitiendo copiar enlaces directos y usar los botones Atrás/Adelante del navegador.
-- **Pausa Accesible en Galería**: El carrusel continuo se pausa de inmediato al recibir foco de teclado (`focusin`/`focusout`), evitando que el elemento enfocado se desplace fuera del viewport.
+- **Navegación Móvil con Focus Trap**: Al desplegar el menú hamburguesa, `<main>` y `<footer>` se aíslan con el atributo `inert`. El tabulador queda confinado dentro del menú y el scroll de fondo se bloquea (`overflow-hidden`).
+- **Botón "Volver Arriba" con Gestión de Foco**: `#scroll-to-top` permanece con `tabindex="-1"` y `aria-hidden="true"` mientras está oculto visualmente, haciéndose accesible por teclado solo cuando `scrollY > 400px`.
+- **Navegación por Anclas y Botón "Atrás"**: Los enlaces internos (`#menu`, `#reservas`, etc.) actualizan la barra de direcciones mediante `history.pushState(null, '', '#' + targetId)` y transfieren el foco por teclado sin recargar la página.
+- **Pausa Accesible en Galería**: El carrusel continuo se pausa automáticamente cuando cualquier elemento interior recibe el foco por teclado (`focusin`/`focusout`).
 
 ### 3. SEO Técnico Google 2026 & Datos Estructurados
-- **Schema.org Graph Completo (`CafeOrCoffeeShop`)**: Incorpora geolocalización satelital precisa (Altamira, Caracas: `10.4965, -66.8524`), horarios por día, rangos de precio, teléfono, métodos de pago aceptados y atributos clave (Pet Friendly, Terraza, WiFi de alta velocidad).
+- **Schema.org Graph Completo (`CafeOrCoffeeShop`)**: Incorpora geolocalización satelital precisa en Altamira, Caracas (`10.4965, -66.8524`), horarios por día de la semana, rangos de precio, teléfono, métodos de pago aceptados y atributos (Pet Friendly, Terraza, WiFi de alta velocidad).
 - **Metadatos Sociales & PWA**: Open Graph optimizado con locale `es_VE`, Twitter Cards en formato `summary_large_image`, manifiesto web (`manifest.webmanifest`) e icono SVG escalable.
 
 ---
@@ -40,7 +52,7 @@ La web combina arquitectura de alto rendimiento generada estáticamente (SSG), d
 | **Estilos & Tokens** | **Tailwind CSS v4** | Utiliza `@theme` con variables nativas de color y espaciado, sistema de diseño centralizado sin sobrecarga de runtime. |
 | **Tipografía** | **Google Fonts** | *Playfair Display* (serif editorial de alta gama para títulos) y *Plus Jakarta Sans* (sans-serif contemporánea para lectura cómoda). |
 | **Iconografía** | **Material Symbols Outlined** | Glifos vectoriales ligeros configurados con `display=swap`. |
-| **Lógica de Cliente** | **TypeScript / Vanilla JS** | Controladores nativos con `IntersectionObserver`, `requestAnimationFrame`, `Intl.NumberFormat` y `history.pushState`. Cero dependencias externas pesadas. |
+| **Lógica de Cliente** | **TypeScript / Vanilla JS** | Controladores nativos con `IntersectionObserver`, `requestAnimationFrame`, `Intl.NumberFormat` y `history.pushState`. Cero librerías pesadas. |
 | **Imágenes** | **astro:assets** | Conversión automática de recursos gráficos a formato moderno WebP con densidades de pantalla `1x` y `2x`. |
 
 ---
@@ -103,7 +115,7 @@ Terroso_Cafe&Restaurante/
 │   ├── favicon.svg
 │   └── manifest.webmanifest
 ├── src/
-│   ├── assets/                 # Imágenes originales optimizadas por Astro
+│   ├── assets/                 # Imágenes optimizadas automáticamente por Astro
 │   │   ├── logo.png
 │   │   ├── café.png
 │   │   ├── criolla.png
@@ -123,9 +135,9 @@ Terroso_Cafe&Restaurante/
 │   │   ├── Reservations.astro  # Widget de reserva con selector dinámico para WhatsApp
 │   │   ├── FloatingActions.astro # Botón flotante de WhatsApp y botón "Volver arriba"
 │   │   └── Footer.astro        # Información legal, redes, horarios y botón Web Share
-│   ├── data/                   # Datos estructurados y constantes del negocio
+│   ├── data/                   # Datos estructurados y mockups comerciales
 │   │   ├── menu.ts             # Listado de platos, categorías, precios y descripciones
-│   │   └── site.ts             # Configuración general (horarios, teléfonos, redes, dirección)
+│   │   └── site.ts             # Configuración general (horarios, teléfonos demo, redes)
 │   ├── layouts/
 │   │   └── Layout.astro        # Plantilla base HTML5, SEO, Schema.org y precarga de fuentes
 │   ├── pages/
@@ -173,14 +185,15 @@ Sirve la carpeta `dist/` localmente para verificar el comportamiento exacto de p
 
 ---
 
-## 📍 Ubicación y Contacto del Establecimiento
+## 📌 Contexto Ficticio del Establecimiento (Caso de Estudio)
 
-- **Dirección**: Av. Luis Roche, Torre Empresarial, Planta Baja, Altamira, Municipio Chacao, Caracas, Miranda, Venezuela (Código Postal 1060).
-- **Especialidades**: Café de finca (Mérida y Táchira), panes de masa madre de fermentación natural (24-48 hrs), brunch artesanal y repostería de autor.
-- **Ambiente**: Terraza al aire libre *Pet-Friendly*, salón climatizado, WiFi de alta velocidad y tomas de corriente para trabajo remoto.
+Para dotar a la demostración de verosimilitud comercial y contextualizar la experiencia de usuario dentro de un caso de estudio real, el proyecto modela un establecimiento gastronómico de alta gama ambientado en **Altamira (Caracas, Venezuela)**:
+- **Ubicación referencial**: Av. Luis Roche, Torre Empresarial, PB, Altamira, Municipio Chacao.
+- **Propuesta conceptual**: Cafetería de especialidad de fincas andinas (Mérida y Táchira), panadería de masa madre de fermentación natural (24-48 hrs) y terraza *Pet-Friendly*.
+- **Datos de contacto y enlaces**: Los números de teléfono, enlaces de WhatsApp, redes y reseñas son valores ficticios/demostrativos utilizados para ilustrar los flujos de interacción e integración.
 
 ---
 
-## 📄 Licencia
+## 📄 Licencia y Reconocimientos
 
-Desarrollado para **Terroso Café & Restaurante**. Todos los derechos reservados © 2026.
+Proyecto de portafolio y demostración de ingeniería frontend desarrollado por su autor. Todos los derechos reservados © 2026.

@@ -51,7 +51,7 @@ import { formatPrice } from "../utils/format";
     <div
       role="tablist"
       aria-label="Filtrar platos del menú de temporada"
-      class="flex items-center gap-2 sm:gap-2.5 mb-[clamp(0.5rem,1.2svh,1rem)] overflow-x-auto overflow-y-hidden no-scrollbar py-1 flex-nowrap sm:flex-wrap shrink-0 touch-pan-x select-none"
+      class="flex items-center gap-2 sm:gap-2.5 mb-[clamp(0.5rem,1.2svh,1rem)] overflow-x-auto overflow-y-hidden no-scrollbar py-1 flex-nowrap sm:flex-wrap shrink-0 touch-auto select-none"
       data-animate
     >
       {
@@ -78,7 +78,7 @@ import { formatPrice } from "../utils/format";
     <!-- Cards: Horizontal Swipe Deck on Mobile (<lg), Responsive 4 Columns on Desktop (lg+) -->
     <div
       id="menu-grid"
-      class="flex lg:grid lg:grid-cols-4 gap-[clamp(0.75rem,1.6svh,1.5rem)] overflow-x-auto overflow-y-hidden no-scrollbar snap-x snap-mandatory lg:snap-none pt-2 pb-3 lg:pt-0 lg:pb-0 items-stretch select-none touch-pan-x"
+      class="flex lg:grid lg:grid-cols-4 gap-[clamp(0.75rem,1.6svh,1.5rem)] -mx-gutter-mobile px-gutter-mobile lg:mx-0 lg:px-0 overflow-x-auto overflow-y-hidden no-scrollbar snap-x snap-mandatory lg:snap-none pt-2 pb-3 lg:pt-0 lg:pb-0 items-stretch select-none touch-auto scroll-smooth"
       tabindex="0"
       role="region"
       aria-label="Catálogo de platos del menú"
@@ -87,7 +87,7 @@ import { formatPrice } from "../utils/format";
         menuItems.map((item, i) => (
           <div
             draggable="false"
-            class="menu-item-card w-[80vw] max-w-74 sm:w-68 md:w-72 lg:w-auto shrink-0 lg:shrink snap-start lg:snap-align-none group bg-surface-container-lowest border border-outline-variant/30 hover:border-primary/40 rounded-2xl overflow-hidden shadow-[0_4px_20px_-2px_rgba(43,33,26,0.06)] hover:shadow-[0_16px_36px_-4px_rgba(43,33,26,0.14)] transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between select-none"
+            class="menu-item-card w-[74vw] max-w-[275px] sm:w-68 md:w-72 lg:w-auto shrink-0 lg:shrink snap-start lg:snap-align-none group bg-surface-container-lowest border border-outline-variant/30 hover:border-primary/40 rounded-2xl overflow-hidden shadow-[0_4px_20px_-2px_rgba(43,33,26,0.06)] hover:shadow-[0_16px_36px_-4px_rgba(43,33,26,0.14)] transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between select-none"
             data-category={item.category}
             data-animate
             style={`transition-delay: ${i * 70}ms`}
@@ -143,6 +143,67 @@ import { formatPrice } from "../utils/format";
       }
     </div>
 
+    <!-- Indicadores y Controles Táctiles para Móvil (<lg) -->
+    <div
+      id="menu-mobile-controls"
+      class="flex lg:hidden items-center justify-between gap-2 pt-1 px-1 shrink-0"
+      role="group"
+      aria-label="Controles del menú en móvil"
+    >
+      <div class="flex items-center gap-1.5 text-xs text-tertiary">
+        <span class="material-symbols-outlined text-[15px] text-primary animate-swipe-nudge">swipe_left</span>
+        <span class="font-label-sm text-[11px] sm:text-xs">Desliza para ver más</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <!-- Dots indicadores de platos -->
+        <div
+          id="menu-dots-container"
+          role="tablist"
+          aria-label="Selector de platos"
+          class="flex items-center gap-1.5"
+        >
+          {
+            menuItems.map((_, i) => (
+              <button
+                type="button"
+                role="tab"
+                id={`menu-dot-${i}`}
+                aria-selected={i === 0 ? "true" : "false"}
+                aria-label={`Ver plato ${i + 1} de ${menuItems.length}`}
+                data-menu-dot-index={i}
+                class={`menu-dot h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                  i === 0
+                    ? "w-5 bg-primary"
+                    : "w-2 bg-outline-variant/40 hover:bg-outline-variant"
+                }`}
+              />
+            ))
+          }
+        </div>
+
+        <!-- Botones inferiores de avance -->
+        <div class="flex items-center gap-1">
+          <button
+            type="button"
+            id="menu-bottom-prev-btn"
+            aria-label="Ver plato anterior"
+            class="w-8 h-8 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface hover:text-primary flex items-center justify-center transition-all cursor-pointer active:scale-95 shadow-xs"
+          >
+            <span class="material-symbols-outlined text-[16px]">chevron_left</span>
+          </button>
+          <button
+            type="button"
+            id="menu-bottom-next-btn"
+            aria-label="Ver plato siguiente"
+            class="w-8 h-8 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface hover:text-primary flex items-center justify-center transition-all cursor-pointer active:scale-95 shadow-xs"
+          >
+            <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Disclaimer Legal y Moneda Local (I18N-02 / BCV) -->
     <div class="mt-[clamp(0.375rem,0.8svh,0.75rem)] text-center text-xs text-on-surface-variant/80 border-t border-outline-variant/20 pt-2.5 max-w-2xl mx-auto space-y-0.5 shrink-0" data-animate>
       <p class="font-medium text-on-surface-variant text-[11px] sm:text-xs">
@@ -176,7 +237,9 @@ import { formatPrice } from "../utils/format";
     const filterButtons =
       document.querySelectorAll<HTMLButtonElement>(".menu-filter-btn");
     const cards = document.querySelectorAll<HTMLElement>(".menu-item-card");
+    const dots = document.querySelectorAll<HTMLButtonElement>(".menu-dot");
     const tablist = document.querySelector('[role="tablist"]');
+    const grid = document.getElementById("menu-grid");
 
     filterButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -215,10 +278,13 @@ import { formatPrice } from "../utils/format";
           "border-outline-variant/30",
         );
 
-        // Filter cards
-        cards.forEach((card) => {
+        // Filter cards & update corresponding dot visibility
+        let firstVisibleIdx = -1;
+        cards.forEach((card, idx) => {
           const itemCat = card.getAttribute("data-category");
-          if (targetCategory === "todos" || itemCat === targetCategory) {
+          const isVisible = targetCategory === "todos" || itemCat === targetCategory;
+          if (isVisible) {
+            if (firstVisibleIdx === -1) firstVisibleIdx = idx;
             card.style.display = "flex";
             card.style.opacity = "0";
             card.style.transform = "scale(0.96)";
@@ -228,8 +294,28 @@ import { formatPrice } from "../utils/format";
               card.style.opacity = "1";
               card.style.transform = "scale(1)";
             });
+            if (dots[idx]) dots[idx].style.display = "inline-block";
           } else {
             card.style.display = "none";
+            if (dots[idx]) dots[idx].style.display = "none";
+          }
+        });
+
+        // Reset scroll position on category switch
+        if (grid) {
+          grid.scrollTo({ left: 0, behavior: "smooth" });
+        }
+
+        // Activate the first visible dot
+        dots.forEach((d, i) => {
+          const isSelected = i === (firstVisibleIdx >= 0 ? firstVisibleIdx : 0);
+          d.setAttribute("aria-selected", isSelected ? "true" : "false");
+          if (isSelected) {
+            d.classList.add("w-5", "bg-primary");
+            d.classList.remove("w-2", "bg-outline-variant/40");
+          } else {
+            d.classList.remove("w-5", "bg-primary");
+            d.classList.add("w-2", "bg-outline-variant/40");
           }
         });
       });
@@ -271,36 +357,90 @@ import { formatPrice } from "../utils/format";
 
   function setupMenuDeckNavigation() {
     const grid = document.getElementById("menu-grid");
-    const prevBtn = document.getElementById("menu-prev-btn");
-    const nextBtn = document.getElementById("menu-next-btn");
+    const topPrevBtn = document.getElementById("menu-prev-btn");
+    const topNextBtn = document.getElementById("menu-next-btn");
+    const bottomPrevBtn = document.getElementById("menu-bottom-prev-btn");
+    const bottomNextBtn = document.getElementById("menu-bottom-next-btn");
+    const dots = document.querySelectorAll<HTMLButtonElement>(".menu-dot");
+    const cards = document.querySelectorAll<HTMLElement>(".menu-item-card");
 
-    if (!grid) return;
+    if (!grid || cards.length === 0) return;
 
     function getScrollStep() {
       const firstCard = grid?.querySelector<HTMLElement>(".menu-item-card");
-      return firstCard ? firstCard.offsetWidth + 16 : 280;
+      return firstCard ? firstCard.offsetWidth + 14 : 280;
     }
 
-    if (prevBtn) {
-      prevBtn.addEventListener("click", () => {
-        grid.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
+    function updateDots(index: number) {
+      dots.forEach((dot, i) => {
+        const isSelected = i === index;
+        dot.setAttribute("aria-selected", isSelected ? "true" : "false");
+        if (isSelected) {
+          dot.classList.add("w-5", "bg-primary");
+          dot.classList.remove("w-2", "bg-outline-variant/40");
+        } else {
+          dot.classList.remove("w-5", "bg-primary");
+          dot.classList.add("w-2", "bg-outline-variant/40");
+        }
       });
     }
 
-    if (nextBtn) {
-      nextBtn.addEventListener("click", () => {
-        grid.scrollBy({ left: getScrollStep(), behavior: "smooth" });
-      });
+    function scrollPrev() {
+      grid.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
     }
+
+    function scrollNext() {
+      grid.scrollBy({ left: getScrollStep(), behavior: "smooth" });
+    }
+
+    // Connect top and bottom controls
+    if (topPrevBtn) topPrevBtn.addEventListener("click", scrollPrev);
+    if (topNextBtn) topNextBtn.addEventListener("click", scrollNext);
+    if (bottomPrevBtn) bottomPrevBtn.addEventListener("click", scrollPrev);
+    if (bottomNextBtn) bottomNextBtn.addEventListener("click", scrollNext);
+
+    // Dot click triggers smooth scroll to selected card
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const targetIdx = parseInt(dot.getAttribute("data-menu-dot-index") || "0", 10);
+        const targetCard = cards[targetIdx];
+        if (targetCard && targetCard.style.display !== "none") {
+          targetCard.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+          updateDots(targetIdx);
+        }
+      });
+    });
+
+    // Real-time scroll synchronization with dots on mobile touch gestures
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+    grid.addEventListener("scroll", () => {
+      if (window.innerWidth >= 1024) return;
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const gridRect = grid.getBoundingClientRect();
+        let closestIndex = 0;
+        let minDiff = Infinity;
+        cards.forEach((card, i) => {
+          if (card.style.display === "none") return;
+          const cardRect = card.getBoundingClientRect();
+          const diff = Math.abs(cardRect.left - gridRect.left);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIndex = i;
+          }
+        });
+        updateDots(closestIndex);
+      }, 50);
+    }, { passive: true });
 
     // Keyboard arrow navigation
     grid.addEventListener("keydown", (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") {
         e.preventDefault();
-        grid.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
+        scrollPrev();
       } else if (e.key === "ArrowRight") {
         e.preventDefault();
-        grid.scrollBy({ left: getScrollStep(), behavior: "smooth" });
+        scrollNext();
       }
     });
   }

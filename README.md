@@ -5,7 +5,8 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![WCAG](https://img.shields.io/badge/WCAG_2.2-AA_Compliant-2E7D32?style=flat-square)](https://www.w3.org/WAI/standards-guidelines/wcag/)
-[![SEO](https://img.shields.io/badge/SEO_Google-2026_Ready-EA4335?style=flat-square&logo=google&logoColor=white)](https://developers.google.com/search)
+
+[![Lighthouse](https://img.shields.io/badge/Lighthouse-High_Score-success?style=flat-square&logo=lighthouse&logoColor=white)](#)
 
 > [!NOTE]
 > **Proyecto Conceptual / Demo de Portafolio**: Este sitio web representa una demostración técnica de nivel Senior Frontend para un establecimiento gastronómico ficticio (**Terroso Café & Restaurante**). Fue concebido, diseñado y construido como pieza de exhibición para ilustrar soluciones reales a retos modernos de desarrollo web: arquitectura estática de máximo rendimiento (Astro 5 SSG), accesibilidad web estricta (**WCAG 2.2 AA**), escalado proporcional en pantallas de ultra-alta definición (**1080p, 2K, Ultrawide 21:9 y 4K**) y SEO técnico de vanguardia.
@@ -16,7 +17,7 @@
 
 Este proyecto sirve como caso de estudio práctico de ingeniería frontend, demostrando:
 
-1. **Arquitectura Zero-Bloat (Astro 5)**: Eliminación de frameworks de cliente pesados para una landing comercial. El 100% de la interactividad se resuelve mediante Vanilla JavaScript y TypeScript con Web APIs nativas, logrando puntuaciones de 100 en Core Web Vitals y carga casi instantánea.
+1. **Arquitectura Zero-Bloat (Astro 5)**: Eliminación de frameworks de cliente pesados para una landing comercial. El 100% de la interactividad se resuelve mediante Vanilla JavaScript y TypeScript con Web APIs nativas, logrando una excelente calificación en Google Lighthouse (Rendimiento, Accesibilidad, Buenas Prácticas y SEO) y carga casi instantánea.
 2. **Escalado Proporcional Dinámico (Layout High-DPI)**: Implementación de una estrategia CSS basada en la raíz `html { font-size: clamp(...) }` que hace crecer armónicamente tipografías, paddings, radios e iconos en resoluciones grandes (1920x1080 hasta 3840x2160 y pantallas ultra-panorámicas 21:9) sin romper la experiencia en móviles ni recurrir a deformaciones con `transform: scale()`.
 3. **Accesibilidad Real (WCAG 2.2 Nivel AA)**: Manejo riguroso de foco por teclado (*focus trap* en menú modal móvil con aislamiento `inert`, botones flotantes con `tabindex` dinámico, carrusel continuo con pausa por foco y pestañas WAI-ARIA navegables por flechas).
 4. **Diseño Editorial & Micro-interacciones de Lujo**: Identidad visual basada en una paleta de tonos tierra (*Earthy Palette*), tipografía combinada (*Playfair Display* + *Plus Jakarta Sans*) y cinemática continua a 55px/s con `requestAnimationFrame`.

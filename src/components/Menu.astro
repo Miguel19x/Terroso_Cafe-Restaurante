@@ -61,6 +61,7 @@ import { formatPrice } from "../utils/format";
             role="tab"
             id={`tab-${cat.id}`}
             aria-selected={i === 0 ? "true" : "false"}
+            tabindex={i === 0 ? "0" : "-1"}
             data-menu-filter={cat.id}
             class={`menu-filter-btn shrink-0 whitespace-nowrap px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full font-label-md text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer min-h-[clamp(2.25rem,4svh,2.75rem)] inline-flex items-center justify-center ${
               i === 0
@@ -136,6 +137,16 @@ import { formatPrice } from "../utils/format";
       }
     </div>
 
+    <!-- Disclaimer Legal y Moneda Local (I18N-02 / BCV) -->
+    <div class="mt-[clamp(0.375rem,0.8svh,0.75rem)] text-center text-xs text-on-surface-variant/80 border-t border-outline-variant/20 pt-2.5 max-w-2xl mx-auto space-y-0.5 shrink-0" data-animate>
+      <p class="font-medium text-on-surface-variant text-[11px] sm:text-xs">
+        * Precios expresados en USD ($). Se reciben pagos en Bolívares (VES) a la tasa oficial del Banco Central de Venezuela (BCV) del día.
+      </p>
+      <p class="text-[10px] sm:text-[11px] text-tertiary">
+        Aceptamos Pago Móvil, tarjetas de débito/crédito nacionales e internacionales y divisas en efectivo.
+      </p>
+    </div>
+
     <!-- Bottom Callout: always visible on the same screen -->
     <div class="mt-[clamp(0.5rem,1.2svh,1rem)] sm:mt-4 text-center shrink-0" data-animate>
       <a
@@ -159,14 +170,16 @@ import { formatPrice } from "../utils/format";
     const filterButtons =
       document.querySelectorAll<HTMLButtonElement>(".menu-filter-btn");
     const cards = document.querySelectorAll<HTMLElement>(".menu-item-card");
+    const tablist = document.querySelector('[role="tablist"]');
 
     filterButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const targetCategory = btn.getAttribute("data-menu-filter");
 
-        // Update active tab styles
+        // Update active tab styles & ARIA attributes (A11Y-05)
         filterButtons.forEach((b) => {
           b.setAttribute("aria-selected", "false");
+          b.setAttribute("tabindex", "-1");
           b.classList.remove(
             "bg-primary",
             "text-on-primary",
@@ -182,6 +195,7 @@ import { formatPrice } from "../utils/format";
         });
 
         btn.setAttribute("aria-selected", "true");
+        btn.setAttribute("tabindex", "0");
         btn.classList.add(
           "bg-primary",
           "text-on-primary",
@@ -214,6 +228,39 @@ import { formatPrice } from "../utils/format";
         });
       });
     });
+
+    // Keyboard Arrow Navigation for WAI-ARIA Tabs pattern (A11Y-05)
+    if (tablist) {
+      tablist.addEventListener("keydown", (e: Event) => {
+        const keyEvent = e as KeyboardEvent;
+        const buttonsArray = Array.from(filterButtons);
+        const currentIndex = buttonsArray.indexOf(document.activeElement as HTMLButtonElement);
+
+        if (currentIndex === -1) return;
+
+        let nextIndex = currentIndex;
+
+        if (keyEvent.key === "ArrowRight") {
+          keyEvent.preventDefault();
+          nextIndex = (currentIndex + 1) % buttonsArray.length;
+        } else if (keyEvent.key === "ArrowLeft") {
+          keyEvent.preventDefault();
+          nextIndex = (currentIndex - 1 + buttonsArray.length) % buttonsArray.length;
+        } else if (keyEvent.key === "Home") {
+          keyEvent.preventDefault();
+          nextIndex = 0;
+        } else if (keyEvent.key === "End") {
+          keyEvent.preventDefault();
+          nextIndex = buttonsArray.length - 1;
+        }
+
+        if (nextIndex !== currentIndex) {
+          const nextBtn = buttonsArray[nextIndex];
+          nextBtn.focus();
+          nextBtn.click();
+        }
+      });
+    }
   }
 
   function setupMenuDeckNavigation() {

@@ -168,10 +168,10 @@ const footerNav = [
 
           <button
             type="button"
+            id="footer-share-btn"
             class="w-11 h-11 rounded-xl bg-surface-container-highest/20 flex items-center justify-center text-primary-fixed hover:bg-primary hover:text-on-primary transition-all cursor-pointer active:scale-95 border border-surface-container-highest/20 shadow-xs"
             aria-label="Compartir Terroso"
             title="Compartir página"
-            onclick="if (navigator.share) { navigator.share({ title: 'Terroso Café & Restaurante', url: window.location.href }); } else { navigator.clipboard?.writeText(window.location.href); }"
           >
             <span class="material-symbols-outlined text-[17px]">share</span>
           </button>
@@ -197,4 +197,30 @@ const footerNav = [
     </div>
   </div>
 </footer>
+
+<script>
+  function setupFooterShare(): void {
+    const shareBtn = document.getElementById('footer-share-btn');
+    if (!shareBtn) return;
+
+    shareBtn.addEventListener('click', async () => {
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: 'Terroso Café & Restaurante',
+            text: 'Café de especialidad y cocina de origen en Altamira, Caracas',
+            url: window.location.href,
+          });
+        } else if (navigator.clipboard) {
+          await navigator.clipboard.writeText(window.location.href);
+        }
+      } catch {
+        // Ignorar cancelaciones de usuario en Web Share API
+      }
+    });
+  }
+
+  setupFooterShare();
+  document.addEventListener('astro:page-load', setupFooterShare);
+</script>
 

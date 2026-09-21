@@ -8,12 +8,14 @@ import { siteConfig } from '../data/site';
   class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-2.5 transition-all duration-300 pointer-events-none *:pointer-events-auto"
   style="bottom: max(1rem, env(safe-area-inset-bottom, 1rem)); right: max(1rem, env(safe-area-inset-right, 1rem));"
 >
-  <!-- Scroll to Top Button -->
+  <!-- Scroll to Top Button (A11Y-02: Hidden from keyboard tab order until scrolled) -->
   <button
     id="scroll-to-top"
     class="w-11 h-11 rounded-full bg-surface-container-lowest border border-outline-variant/30 shadow-[0_8px_20px_-4px_rgba(43,33,26,0.18)] flex items-center justify-center text-on-surface hover:text-primary hover:bg-primary/10 transition-all duration-300 opacity-0 pointer-events-none translate-y-2 cursor-pointer active:scale-95"
     aria-label="Volver arriba"
     title="Volver arriba"
+    tabindex="-1"
+    aria-hidden="true"
   >
     <span class="material-symbols-outlined text-[20px]">arrow_upward</span>
   </button>
@@ -51,8 +53,10 @@ import { siteConfig } from '../data/site';
         const isNearBottom = entries.some((entry) => entry.isIntersecting);
         if (isNearBottom) {
           container.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4', 'scale-95');
+          container.setAttribute('inert', '');
         } else {
           container.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4', 'scale-95');
+          container.removeAttribute('inert');
         }
       },
       { threshold: 0.08 }

@@ -210,6 +210,7 @@ const baseItems =
     if (!viewport || !track || !setA) return;
 
     let isHovered = false;
+    let isFocused = false;
     let isPointerDown = false;
     let isTouchActive = false;
     let isDragging = false;
@@ -239,7 +240,7 @@ const baseItems =
       // Prevenir saltos bruscos tras inactividad o cambio de pestaña
       const deltaSeconds = Math.min(elapsed, 0.1);
 
-      if (!isHovered && !isPointerDown && !isTouchActive && !document.hidden) {
+      if (!isHovered && !isFocused && !isPointerDown && !isTouchActive && !document.hidden) {
         currentX += baseSpeed * deltaSeconds;
 
         const loopWidth = getLoopWidth();
@@ -341,6 +342,18 @@ const baseItems =
     viewport.addEventListener("pointerleave", (e: PointerEvent) => {
       if (e.pointerType === "mouse") {
         isHovered = false;
+        lastTime = performance.now();
+      }
+    });
+
+    // ── Soporte Teclado / Accesibilidad (Pausar al recibir foco - WCAG 2.2 A11Y-04) ──
+    viewport.addEventListener("focusin", () => {
+      isFocused = true;
+    });
+
+    viewport.addEventListener("focusout", (e: FocusEvent) => {
+      if (!viewport.contains(e.relatedTarget as Node)) {
+        isFocused = false;
         lastTime = performance.now();
       }
     });

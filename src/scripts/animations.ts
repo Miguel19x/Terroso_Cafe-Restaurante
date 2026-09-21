@@ -33,7 +33,14 @@ export function initScrollAnimations(): void {
   });
 }
 
-// ── Animated counter ─────────────────────────────────────────────────────────
+// ── Animated counter with Venezuelan comma format (I18N-01) ─────────────────
+function formatNumberVE(val: number, isDecimal: boolean): string {
+  if (isDecimal) {
+    return val.toLocaleString('es-VE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  }
+  return Math.floor(val).toString();
+}
+
 function animateCounter(el: HTMLElement, target: number, suffix: string, duration = 1500): void {
   const isDecimal = !Number.isInteger(target);
   const start = performance.now();
@@ -46,10 +53,10 @@ function animateCounter(el: HTMLElement, target: number, suffix: string, duratio
     const current = eased * target;
 
     if (progress < 1) {
-      el.textContent = (isDecimal ? current.toFixed(1) : Math.floor(current).toString()) + suffix;
+      el.textContent = formatNumberVE(current, isDecimal) + suffix;
       requestAnimationFrame(update);
     } else {
-      el.textContent = (isDecimal ? target.toFixed(1) : target.toString()) + suffix;
+      el.textContent = formatNumberVE(target, isDecimal) + suffix;
     }
   }
 
@@ -87,10 +94,19 @@ export function initCounters(): void {
   });
 }
 
-// ── Scroll-to-top button ──────────────────────────────────────────────────────
+// ── Scroll-to-top button (A11Y-02 & A11Y-01) ──────────────────────────────────
 export function initScrollToTop(): void {
   const btn = document.querySelector<HTMLButtonElement>('#scroll-to-top');
   if (!btn) return;
+
+  // Estado inicial accesible si está en la parte superior (A11Y-02)
+  if (window.scrollY <= 400) {
+    btn.setAttribute('tabindex', '-1');
+    btn.setAttribute('aria-hidden', 'true');
+  } else {
+    btn.setAttribute('tabindex', '0');
+    btn.setAttribute('aria-hidden', 'false');
+  }
 
   window.addEventListener(
     'scroll',
@@ -98,9 +114,13 @@ export function initScrollToTop(): void {
       if (window.scrollY > 400) {
         btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
         btn.classList.add('opacity-100', 'translate-y-0');
+        btn.setAttribute('tabindex', '0');
+        btn.setAttribute('aria-hidden', 'false');
       } else {
         btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
         btn.classList.remove('opacity-100', 'translate-y-0');
+        btn.setAttribute('tabindex', '-1');
+        btn.setAttribute('aria-hidden', 'true');
       }
     },
     { passive: true }

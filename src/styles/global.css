@@ -5,6 +5,39 @@
 /* Import Tailwind v4 base */
 @import "tailwindcss";
 
+/* ── Self-hosted Fonts (@fontsource) ────────────────────── */
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/500.css";
+@import "@fontsource/playfair-display/600.css";
+@import "@fontsource/playfair-display/700.css";
+@import "@fontsource/playfair-display/400-italic.css";
+
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+
+@import "@fontsource/material-symbols-outlined/index.css";
+
+/* ── Font Metric Overrides for Fallback Fonts (CLS Reduction) ── */
+@font-face {
+  font-family: "Playfair Display Fallback";
+  src: local("Georgia"), local("Times New Roman");
+  ascent-override: 95%;
+  descent-override: 28%;
+  line-gap-override: 0%;
+  size-adjust: 107%;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans Fallback";
+  src: local("Arial"), local("Helvetica"), sans-serif;
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+}
+
 /* ── Design Tokens (@theme) ─────────────────────────────── */
 @theme {
   /* Colors */
@@ -64,25 +97,25 @@
   --color-inverse-on-surface: #f7f0e7;
 
 
-  /* Typography — Font families */
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  /* Typography — Font families with fallback metric matching */
+  --font-serif: "Playfair Display", "Playfair Display Fallback", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", ui-sans-serif, system-ui, sans-serif;
 
-  --font-display-lg: "Playfair Display", Georgia, serif;
-  --font-headline-xl: "Playfair Display", Georgia, serif;
-  --font-headline-xl-mobile: "Playfair Display", Georgia, serif;
-  --font-headline-lg: "Playfair Display", Georgia, serif;
-  --font-headline-md: "Playfair Display", Georgia, serif;
-  --font-headline-sm: "Playfair Display", Georgia, serif;
-  --font-display-lg-mobile: "Playfair Display", Georgia, serif;
+  --font-display-lg: "Playfair Display", "Playfair Display Fallback", Georgia, serif;
+  --font-headline-xl: "Playfair Display", "Playfair Display Fallback", Georgia, serif;
+  --font-headline-xl-mobile: "Playfair Display", "Playfair Display Fallback", Georgia, serif;
+  --font-headline-lg: "Playfair Display", "Playfair Display Fallback", Georgia, serif;
+  --font-headline-md: "Playfair Display", "Playfair Display Fallback", Georgia, serif;
+  --font-headline-sm: "Playfair Display", "Playfair Display Fallback", Georgia, serif;
+  --font-display-lg-mobile: "Playfair Display", "Playfair Display Fallback", Georgia, serif;
 
-  --font-body-lg: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-body-md: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-body-sm: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-title-md: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-label-lg: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-label-md: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-label-sm: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body-lg: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-body-md: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-body-sm: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-title-md: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-label-lg: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-label-md: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-label-sm: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", ui-sans-serif, system-ui, sans-serif;
 
   /* Typography — Font sizes with line heights */
   --text-display-lg: 3.5rem;
@@ -387,6 +420,25 @@
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+    line-height: 1;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+    transition-property: transform, opacity, color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
   }
 
   .material-symbols-fill {

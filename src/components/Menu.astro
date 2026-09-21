@@ -92,14 +92,20 @@ import { formatPrice } from "../utils/format";
             data-animate
             style={`transition-delay: ${i * 70}ms`}
           >
-            <div class="relative aspect-16/10 h-[clamp(95px,18svh,190px)] max-h-[clamp(95px,18svh,190px)] overflow-hidden bg-surface-container-high shrink-0 select-none">
+            <div class="relative aspect-16/10 h-[clamp(95px,18svh,190px)] max-h-[clamp(95px,18svh,190px)] overflow-hidden bg-surface-container-high shrink-0 select-none" style="aspect-ratio: 16/10;">
               <Image
                 alt={item.imageAlt}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
                 src={item.image}
+                width={600}
+                height={375}
+                quality={70}
+                format="avif"
+                widths={[300, 450, 600]}
+                sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 400px"
                 loading="lazy"
-                decoding="auto"
-                densities={[1, 2]}
+                decoding="async"
+                fetchpriority="low"
                 draggable="false"
               />
               <span class="absolute top-2 right-2 bg-surface-container-lowest/95 backdrop-blur-md text-on-surface font-semibold text-[11px] sm:text-xs px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full uppercase tracking-wider shadow-sm border border-black/5">
@@ -127,7 +133,7 @@ import { formatPrice } from "../utils/format";
                   </span>
                   {item.iconLabel}
                 </span>
-                <span class="material-symbols-outlined text-outline-variant group-hover:text-primary group-hover:translate-x-1 transition-all duration-200 text-[15px]">
+                <span class="material-symbols-outlined text-outline-variant group-hover:text-primary group-hover:translate-x-1 transition-transform duration-200 text-[15px]">
                   arrow_forward
                 </span>
               </div>

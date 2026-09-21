@@ -98,7 +98,14 @@ import { siteConfig } from '../data/site';
 
       <!-- Right Column: Interactive Booking Widget Card -->
       <div class="lg:col-span-6" data-animate="slide-left">
-        <div class="bg-surface-container-lowest text-on-surface rounded-2xl sm:rounded-3xl py-[clamp(0.625rem,1.6svh,1.75rem)] px-[clamp(0.875rem,2svh,1.75rem)] shadow-[0_20px_50px_-10px_rgba(17,31,8,0.35)] border border-outline-variant/20 relative">
+        <form
+          id="reservation-form"
+          data-webmcp="true"
+          name="reserva-mesa"
+          data-webmcp-description="Formulario interactivo para personalizar y solicitar reserva de mesa en Terroso Café & Restaurante"
+          class="bg-surface-container-lowest text-on-surface rounded-2xl sm:rounded-3xl py-[clamp(0.625rem,1.6svh,1.75rem)] px-[clamp(0.875rem,2svh,1.75rem)] shadow-[0_20px_50px_-10px_rgba(17,31,8,0.35)] border border-outline-variant/20 relative"
+          onsubmit="return false;"
+        >
 
           <div class="mb-[clamp(0.25rem,1svh,0.75rem)]">
             <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-primary block mb-0.5">Reserva Directa</span>
@@ -219,7 +226,7 @@ import { siteConfig } from '../data/site';
               <span>Email</span>
             </a>
           </div>
-        </div>
+        </form>
       </div>
 
     </div>

@@ -53,9 +53,13 @@ import foundersImg from '../assets/fundadores.jpg';
               alt="Valentina y Rodrigo, fundadores y maestros tostadores de Terroso"
               class="w-full h-full object-cover object-top"
               src={foundersImg}
+              width={96}
+              height={96}
+              quality={70}
+              format="avif"
               loading="lazy"
-              decoding="auto"
-              densities={[1, 2]}
+              decoding="async"
+              fetchpriority="low"
             />
           </div>
           <div class="min-w-0 grow">
@@ -73,14 +77,21 @@ import foundersImg from '../assets/fundadores.jpg';
       <div class="md:col-span-6 relative flex items-center justify-center md:justify-end mt-2 md:mt-0" data-animate="slide-left">
         <div
           class="relative w-full max-w-95 lg:max-w-115 rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_20px_40px_-8px_rgba(43,33,26,0.16)] border border-outline-variant/20 bg-surface-container-high max-h-[clamp(210px,46svh,400px)] aspect-4/3"
+          style="aspect-ratio: 4/3;"
         >
           <Image
             alt="Barista artesanal preparando café filtrado V60 de origen andino venezolano"
             class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
             src={cafeImg}
+            width={600}
+            height={450}
+            quality={70}
+            format="avif"
+            widths={[320, 480, 600]}
+            sizes="(max-width: 768px) 100vw, 50vw"
             loading="lazy"
-            decoding="auto"
-            densities={[1, 2]}
+            decoding="async"
+            fetchpriority="low"
           />
 
           <!-- Floating Badge: Comercio Justo (Top-Left) -->
@@ -104,9 +115,13 @@ import foundersImg from '../assets/fundadores.jpg';
               alt="Detalle de pan de masa madre y croissant recién salidos del horno"
               class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               src={sourdoughImg}
+              width={150}
+              height={150}
+              quality={70}
+              format="avif"
               loading="lazy"
-              decoding="auto"
-              densities={[1, 2]}
+              decoding="async"
+              fetchpriority="low"
             />
           </div>
         </div>

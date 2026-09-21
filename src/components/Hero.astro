@@ -113,15 +113,21 @@ import heroImg from "../assets/terroso-ambiente-hero.jpeg";
       >
         <div
           class="relative w-full max-w-95 sm:max-w-120 md:max-w-none 2xl:max-w-160 rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(43,33,26,0.18)] max-h-[clamp(210px,46svh,440px)] 2xl:max-h-130 aspect-4/3"
+          style="aspect-ratio: 4/3;"
         >
           <Image
             alt="Ambiente cálido de Terroso Café en Altamira, Caracas, con barra de café de especialidad, mesas rústicas y abundante vegetación"
             class="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700 ease-out"
             src={heroImg}
+            width={800}
+            height={600}
+            quality={70}
+            format="avif"
+            widths={[360, 480, 640, 800]}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 640px"
             loading="eager"
             fetchpriority="high"
             decoding="sync"
-            densities={[1, 2]}
           />
           <div
             class="absolute inset-0 bg-linear-to-t from-inverse-surface/30 via-transparent to-transparent pointer-events-none"

@@ -5,32 +5,40 @@
 
 // ── Fade-in / slide-up on scroll ─────────────────────────────────────────────
 export function initScrollAnimations(): void {
-  const elements = document.querySelectorAll<HTMLElement>('[data-animate]');
-  if (!elements.length) return;
+  const setup = () => {
+    const elements = document.querySelectorAll<HTMLElement>('[data-animate]');
+    if (!elements.length) return;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
-  );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
+    );
 
-  elements.forEach((el) => {
-    // Si ya está en pantalla al cargar (como el Hero), animar suavemente
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      requestAnimationFrame(() => {
-        el.classList.add('animate-in');
-      });
-    } else {
-      observer.observe(el);
-    }
-  });
+    elements.forEach((el) => {
+      // Si ya está en pantalla al cargar (como el Hero), animar suavemente
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        requestAnimationFrame(() => {
+          el.classList.add('animate-in');
+        });
+      } else {
+        observer.observe(el);
+      }
+    });
+  };
+
+  if ('requestIdleCallback' in window) {
+    (window as any).requestIdleCallback(setup, { timeout: 1000 });
+  } else {
+    setTimeout(setup, 30);
+  }
 }
 
 // ── Animated counter with Venezuelan comma format (I18N-01) ─────────────────
@@ -64,34 +72,42 @@ function animateCounter(el: HTMLElement, target: number, suffix: string, duratio
 }
 
 export function initCounters(): void {
-  const counters = document.querySelectorAll<HTMLElement>('[data-counter]');
-  if (!counters.length) return;
+  const setup = () => {
+    const counters = document.querySelectorAll<HTMLElement>('[data-counter]');
+    if (!counters.length) return;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target as HTMLElement;
-          const target = parseFloat(el.dataset.counter ?? '0');
-          const suffix = el.dataset.suffix ?? '';
-          animateCounter(el, target, suffix);
-          observer.unobserve(el);
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const target = parseFloat(el.dataset.counter ?? '0');
+            const suffix = el.dataset.suffix ?? '';
+            animateCounter(el, target, suffix);
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
-  counters.forEach((el) => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      const target = parseFloat(el.dataset.counter ?? '0');
-      const suffix = el.dataset.suffix ?? '';
-      animateCounter(el, target, suffix);
-    } else {
-      observer.observe(el);
-    }
-  });
+    counters.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        const target = parseFloat(el.dataset.counter ?? '0');
+        const suffix = el.dataset.suffix ?? '';
+        animateCounter(el, target, suffix);
+      } else {
+        observer.observe(el);
+      }
+    });
+  };
+
+  if ('requestIdleCallback' in window) {
+    (window as any).requestIdleCallback(setup, { timeout: 1500 });
+  } else {
+    setTimeout(setup, 60);
+  }
 }
 
 // ── Scroll-to-top button (A11Y-02 & A11Y-01) ──────────────────────────────────

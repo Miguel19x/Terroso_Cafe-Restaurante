@@ -1,9 +1,9 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
-// https://astro.build/config
+// Production configuration for https://terroso.com
 export default defineConfig({
-  site: 'https://cafeterroso.com.ve',
+  site: 'https://terroso.com',
   compressHTML: true,
   build: {
     inlineStylesheets: 'auto',

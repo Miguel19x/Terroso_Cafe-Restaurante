@@ -1,0 +1,107 @@
+---
+import { Image } from 'astro:assets';
+import logoImg from '../assets/logo.png';
+
+const navLinks = [
+  { label: 'Inicio', href: '#inicio' },
+  { label: 'Menú', href: '#menu' },
+  { label: 'Galería', href: '#galeria' },
+  { label: 'Nosotros', href: '#historia' },
+  { label: 'Reservas', href: '#reservas' },
+];
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 w-full z-50 bg-surface-container/90 backdrop-blur-md shadow-[0_4px_20px_-2px_rgba(43,33,26,0.06)] transition-all duration-300"
+>
+  <div class="h-full w-full max-w-7xl mx-auto px-gutter-mobile md:px-margin-tablet lg:px-margin flex items-center justify-between">
+
+    <!-- Logo -->
+    <a class="flex items-center gap-3 group" href="#inicio" aria-label="Terroso – Inicio">
+      <Image
+        src={logoImg}
+        alt="Terroso Logo"
+        class="h-10 sm:h-11 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+        width={80}
+        height={80}
+        loading="eager"
+        fetchpriority="high"
+        densities={[1, 2]}
+      />
+      <span class="font-headline-md text-xl sm:text-2xl text-on-surface tracking-tight group-hover:text-primary transition-colors font-semibold">
+        Terroso
+      </span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-space-md" aria-label="Navegación principal">
+      {navLinks.map((link) => (
+        <a
+          data-nav-link
+          href={link.href}
+          class="px-space-sm py-space-xs rounded-xl font-label-lg text-label-lg font-medium text-on-surface-variant hover:text-on-surface transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Desktop CTA -->
+    <div class="flex items-center gap-space-md">
+      <a
+        href="#reservas"
+        class="hidden lg:inline-flex items-center justify-center bg-primary text-on-primary font-label-lg text-label-lg px-space-lg py-space-sm rounded-xl shadow-[0_4px_20px_-2px_rgba(43,33,26,0.12)] hover:bg-primary-container transition-all active:scale-[0.98]"
+      >
+        Reservar mesa
+      </a>
+
+      <!-- Mobile hamburger button (44px touch target) -->
+      <button
+        id="mobile-menu-btn"
+        class="lg:hidden w-11 h-11 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-surface-container-highest transition-colors active:scale-95 cursor-pointer"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span id="menu-icon" class="material-symbols-outlined text-[24px]">menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile dropdown menu -->
+  <div
+    id="mobile-menu"
+    class="-translate-y-2 opacity-0 pointer-events-none invisible transition-all duration-200 ease-out absolute top-full left-0 right-0 bg-surface-container/95 backdrop-blur-md border-t border-outline-variant/30 shadow-[0_8px_24px_-4px_rgba(43,33,26,0.12)] px-gutter-mobile py-4 flex flex-col gap-1.5 lg:hidden"
+    role="navigation"
+    aria-label="Menú móvil"
+    inert
+  >
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="flex items-center gap-3 px-4 py-3 min-h-11 rounded-xl font-label-lg text-base text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
+      >
+        {link.label}
+      </a>
+    ))}
+    <a
+      href="#reservas"
+      class="mt-2 flex items-center justify-center gap-2 bg-primary text-on-primary font-label-lg text-base min-h-11 px-4 py-3 rounded-xl shadow-xs"
+    >
+      <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+      Reservar mesa
+    </a>
+  </div>
+
+  <!-- Scroll Progress Indicator -->
+  <div
+    id="scroll-progress"
+    class="absolute bottom-0 left-0 h-[2.5px] bg-linear-to-r from-primary via-primary-container to-secondary w-0 transition-[width] duration-75 ease-out pointer-events-none"
+    role="progressbar"
+    aria-label="Progreso de desplazamiento"
+    aria-valuenow="0"
+    aria-valuemin="0"
+    aria-valuemax="100"
+  ></div>
+</header>

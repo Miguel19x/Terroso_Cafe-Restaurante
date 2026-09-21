@@ -1,0 +1,58 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import InfoStrip from "../components/InfoStrip.astro";
+import Menu from "../components/Menu.astro";
+import Gallery from "../components/Gallery.astro";
+import Stats from "../components/Stats.astro";
+import History from "../components/History.astro";
+import Testimonials from "../components/Testimonials.astro";
+import Reservations from "../components/Reservations.astro";
+import FloatingActions from "../components/FloatingActions.astro";
+import Footer from "../components/Footer.astro";
+import { siteConfig } from "../data/site";
+---
+
+<Layout
+  title={`${siteConfig.name} — ${siteConfig.tagline} | ${siteConfig.address.neighborhood}, ${siteConfig.address.city}`}
+  description={siteConfig.description}
+>
+  <Header />
+
+  <main
+    id="main-content"
+    class="w-full pt-(--header-height) bg-surface transition-[padding-top] duration-300"
+  >
+    <div class="flex flex-col w-full">
+      <Hero />
+      <InfoStrip />
+      <Menu />
+      <Gallery />
+      <Stats />
+      <History />
+      <Testimonials />
+      <Reservations />
+    </div>
+  </main>
+
+  <FloatingActions />
+  <Footer />
+</Layout>
+
+<script>
+  import { initNavigation } from "../scripts/navigation";
+  import {
+    initScrollAnimations,
+    initCounters,
+    initScrollToTop,
+  } from "../scripts/animations";
+
+  // Initialize all interactive behaviors after DOM is ready
+  document.addEventListener("DOMContentLoaded", () => {
+    initNavigation();
+    initScrollAnimations();
+    initCounters();
+    initScrollToTop();
+  });
+</script>

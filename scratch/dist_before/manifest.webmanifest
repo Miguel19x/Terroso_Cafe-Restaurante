@@ -1,0 +1,18 @@
+{
+  "name": "Terroso — Café de Especialidad & Cocina de Origen",
+  "short_name": "Terroso",
+  "description": "Café de especialidad venezolano y panadería artesanal de masa madre en Altamira, Caracas.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fff8f1",
+  "theme_color": "#9a401c",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

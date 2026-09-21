@@ -1,0 +1,48 @@
+---
+import { siteConfig } from '../data/site';
+---
+
+<section class="w-full bg-secondary text-on-secondary py-3.5 sm:py-4 border-b border-secondary-container/20">
+  <div class="max-w-7xl mx-auto px-gutter-mobile md:px-margin-tablet lg:px-margin flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left">
+    <!-- Row 1 (Mobile) / Left Column (Desktop) -->
+    <div class="flex items-center justify-center sm:justify-start gap-2 text-center sm:text-left">
+      <span class="material-symbols-outlined text-secondary-container text-[18px] sm:text-[20px] shrink-0">eco</span>
+      <span class="font-label-md sm:font-label-lg text-secondary-container font-medium tracking-wide text-xs sm:text-label-lg">
+        Café de Finca Directa • Táchira, Mérida y Barinas
+      </span>
+    </div>
+
+    <!-- Row 2 (Mobile) / Right Column (Desktop) -->
+    <div class="flex flex-wrap items-center justify-center sm:justify-end gap-x-3 gap-y-1.5 text-surface-container-high font-body-sm text-xs sm:text-body-sm">
+      <div class="flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[16px] sm:text-[17px] text-secondary-container shrink-0">schedule</span>
+        <span id="infostrip-today-schedule" class="whitespace-nowrap">Hoy: {siteConfig.schedule.weekdays.opens} – {siteConfig.schedule.weekdays.closes} hs</span>
+      </div>
+      <span class="text-secondary-container hidden sm:inline" aria-hidden="true">•</span>
+      <a
+        href={siteConfig.address.mapsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-1.5 hover:text-surface transition-colors py-1 sm:py-0"
+        title="Ver ubicación en Google Maps"
+      >
+        <span class="material-symbols-outlined text-[16px] sm:text-[17px] text-secondary-container shrink-0">location_on</span>
+        <span class="whitespace-nowrap">{siteConfig.address.neighborhood}, {siteConfig.address.city}</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { getCaracasTodaySchedule } from '../data/site';
+
+  function updateTodayHours(): void {
+    const el = document.getElementById('infostrip-today-schedule');
+    if (!el) return;
+    const { formattedHours } = getCaracasTodaySchedule();
+    el.textContent = `Hoy: ${formattedHours}`;
+  }
+
+  updateTodayHours();
+  document.addEventListener('astro:page-load', updateTodayHours);
+</script>

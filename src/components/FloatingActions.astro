@@ -1,0 +1,67 @@
+---
+import { siteConfig } from '../data/site';
+---
+
+<!-- Floating WhatsApp FAB & Scroll-to-top with mobile Safe Area Insets -->
+<div
+  id="floating-actions-container"
+  class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-2.5 transition-all duration-300 pointer-events-none *:pointer-events-auto"
+  style="bottom: max(1rem, env(safe-area-inset-bottom, 1rem)); right: max(1rem, env(safe-area-inset-right, 1rem));"
+>
+  <!-- Scroll to Top Button -->
+  <button
+    id="scroll-to-top"
+    class="w-11 h-11 rounded-full bg-surface-container-lowest border border-outline-variant/30 shadow-[0_8px_20px_-4px_rgba(43,33,26,0.18)] flex items-center justify-center text-on-surface hover:text-primary hover:bg-primary/10 transition-all duration-300 opacity-0 pointer-events-none translate-y-2 cursor-pointer active:scale-95"
+    aria-label="Volver arriba"
+    title="Volver arriba"
+  >
+    <span class="material-symbols-outlined text-[20px]">arrow_upward</span>
+  </button>
+
+  <!-- WhatsApp FAB (Compact circle on mobile, pill on tablet/desktop) -->
+  <a
+    id="floating-whatsapp-fab"
+    href={`https://wa.me/${siteConfig.contact.whatsappNumber}?text=${encodeURIComponent('Hola Terroso, quisiera consultar por una reserva')}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Reservar mesa por WhatsApp"
+    title="Reservar mesa por WhatsApp"
+    class="w-12 h-12 sm:w-auto sm:px-4 sm:py-3 rounded-full flex items-center justify-center gap-2.5 bg-primary hover:bg-primary-container text-on-primary shadow-[0_10px_25px_-4px_rgba(154,64,28,0.4)] transition-all duration-300 transform hover:scale-105 active:scale-95 group cursor-pointer"
+  >
+    <div class="w-6 h-6 rounded-full bg-on-primary/20 flex items-center justify-center shrink-0">
+      <span class="material-symbols-outlined text-on-primary text-[18px]">chat</span>
+    </div>
+    <span class="hidden sm:inline font-label-md text-xs sm:text-sm font-semibold tracking-normal whitespace-nowrap">
+      Reservar mesa
+    </span>
+  </a>
+</div>
+
+<script>
+  function setupFloatingActionsVisibility(): void {
+    const container = document.getElementById('floating-actions-container');
+    if (!container) return;
+
+    // Auto-hide floating actions when user reaches #reservas or footer to avoid covering text/actions
+    const targets = document.querySelectorAll('#reservas, footer');
+    if (!targets.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const isNearBottom = entries.some((entry) => entry.isIntersecting);
+        if (isNearBottom) {
+          container.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4', 'scale-95');
+        } else {
+          container.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4', 'scale-95');
+        }
+      },
+      { threshold: 0.08 }
+    );
+
+    targets.forEach((target) => observer.observe(target));
+  }
+
+  setupFloatingActionsVisibility();
+  document.addEventListener('astro:page-load', setupFloatingActionsVisibility);
+</script>
+

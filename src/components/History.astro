@@ -1,0 +1,118 @@
+---
+import { Image } from 'astro:assets';
+import cafeImg from '../assets/café.png';
+import sourdoughImg from '../assets/croissant & sourdough.jpg';
+import foundersImg from '../assets/fundadores.jpg';
+---
+
+<section
+  id="historia"
+  class="w-full bg-surface-container section-screen-fit section-divider overflow-x-clip relative"
+>
+  <div class="max-w-7xl mx-auto px-gutter-mobile md:px-margin-tablet lg:px-margin w-full flex flex-col justify-center my-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5 sm:gap-6 lg:gap-12 items-center">
+
+      <!-- Story Narrative (Col 1-6) -->
+      <div class="md:col-span-6 flex flex-col justify-center" data-animate="slide-right">
+        <span class="font-label-md text-xs sm:text-label-md tracking-widest text-primary uppercase block mb-1 sm:mb-1.5 font-semibold">
+          FILOSOFÍA Y ORIGEN
+        </span>
+        <h2 class="font-headline-xl text-fluid-headline text-on-surface leading-tight mb-[clamp(0.25rem,1svh,0.75rem)] font-bold">
+          Nacidos de la tierra, moldeados por la paciencia
+        </h2>
+
+        <div class="space-y-[clamp(0.375rem,1svh,0.75rem)] font-body-md text-xs sm:text-sm lg:text-base text-tertiary leading-relaxed">
+          <p>
+            Terroso nació como un refugio botánico y un humilde taller de fermentación en Altamira. Comenzamos con un pequeño tostador manual de 1 kilo y la convicción de honrar el trabajo invisible de los caficultores andinos.
+          </p>
+          <p class="hidden sm:block">
+            En nuestra cocina, el budare y el fogón sustituyen a las prisas, y cada receta es un homenaje a las manos tachirenses que cultivan nuestra despensa viva.
+          </p>
+        </div>
+
+        <!-- 3 Milestone Pillars -->
+        <div class="grid grid-cols-3 gap-2 sm:gap-3 my-[clamp(0.375rem,1.5svh,1rem)]">
+          <div class="bg-surface-container-lowest p-[clamp(0.375rem,1.2svh,0.75rem)] rounded-xl border border-outline-variant/25 text-center shadow-xs">
+            <span class="font-serif font-bold text-primary text-xs sm:text-base lg:text-lg block">2018</span>
+            <span class="text-[9px] sm:text-xs text-tertiary block font-medium">Taller Altamira</span>
+          </div>
+          <div class="bg-surface-container-lowest p-[clamp(0.375rem,1.2svh,0.75rem)] rounded-xl border border-outline-variant/25 text-center shadow-xs">
+            <span class="font-serif font-bold text-primary text-xs sm:text-base lg:text-lg block">Andes</span>
+            <span class="text-[9px] sm:text-xs text-tertiary block font-medium">Trato directo</span>
+          </div>
+          <div class="bg-surface-container-lowest p-[clamp(0.375rem,1.2svh,0.75rem)] rounded-xl border border-outline-variant/25 text-center shadow-xs">
+            <span class="font-serif font-bold text-primary text-xs sm:text-base lg:text-lg block">Horno</span>
+            <span class="text-[9px] sm:text-xs text-tertiary block font-medium">Masa Madre</span>
+          </div>
+        </div>
+
+        <!-- Unified Founders & Manifesto Quote Card -->
+        <div class="flex items-center gap-2.5 sm:gap-3 bg-surface-container-lowest/90 backdrop-blur-xs p-[clamp(0.5rem,1.2svh,0.875rem)] rounded-2xl border border-outline-variant/25 shadow-xs mt-1 sm:mt-2">
+          <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-surface-container-high shrink-0 border-2 border-primary/25 shadow-xs ring-2 ring-surface-container">
+            <Image
+              alt="Valentina y Rodrigo, fundadores y maestros tostadores de Terroso"
+              class="w-full h-full object-cover object-top"
+              src={foundersImg}
+              loading="eager"
+              decoding="auto"
+              densities={[1, 2]}
+            />
+          </div>
+          <div class="min-w-0 grow">
+            <blockquote class="font-serif italic text-xs sm:text-sm text-on-surface leading-snug">
+              “El café no se apresura, se vive.”
+            </blockquote>
+            <p class="text-[10px] sm:text-xs text-tertiary font-medium mt-0.5">
+              Valentina &amp; Rodrigo · <span class="text-primary font-semibold">Fundadores</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Story Visual Mosaic (Col 7-12) -->
+      <div class="md:col-span-6 relative flex items-center justify-center md:justify-end mt-2 md:mt-0" data-animate="slide-left">
+        <div
+          class="relative w-full max-w-95 lg:max-w-115 rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_20px_40px_-8px_rgba(43,33,26,0.16)] border border-outline-variant/20 bg-surface-container-high max-h-[clamp(210px,46svh,400px)] aspect-4/3"
+        >
+          <Image
+            alt="Barista artesanal preparando café filtrado V60 de origen andino venezolano"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+            src={cafeImg}
+            loading="eager"
+            decoding="auto"
+            densities={[1, 2]}
+          />
+
+          <!-- Floating Badge: Comercio Justo (Top-Left) -->
+          <div class="absolute top-2 left-2 sm:top-3 sm:left-3 bg-surface-container-lowest/95 backdrop-blur-md px-2 py-0.5 sm:px-3 sm:py-1 rounded-xl shadow-md border border-outline-variant/20 flex items-center gap-1.5 sm:gap-2">
+            <span class="material-symbols-outlined text-primary text-[14px] sm:text-[17px]">handshake</span>
+            <div>
+              <p class="font-label-sm text-[9px] sm:text-[11px] uppercase tracking-wider font-semibold text-primary">Comercio Justo</p>
+              <p class="text-[9px] sm:text-[11px] text-on-surface font-medium leading-none">Fincas Andinas 100%</p>
+            </div>
+          </div>
+
+          <!-- Floating Badge: Refugio Botánico (Bottom-Left) -->
+          <div class="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 bg-surface-container-lowest/95 backdrop-blur-md px-2 py-0.5 sm:px-3 sm:py-1 rounded-xl shadow-md border border-outline-variant/20 flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-secondary text-[14px] sm:text-[16px]">potted_plant</span>
+            <span class="text-[9px] sm:text-[11px] font-semibold text-on-surface">Refugio Botánico</span>
+          </div>
+
+          <!-- Overlapping Sourdough Photo Inset -->
+          <div class="hidden sm:block absolute bottom-3 right-3 w-[clamp(4.5rem,10svh,7.5rem)] h-[clamp(4.5rem,10svh,7.5rem)] rounded-2xl overflow-hidden shadow-lg ring-2 ring-surface-container border border-outline-variant/20">
+            <Image
+              alt="Detalle de pan de masa madre y croissant recién salidos del horno"
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              src={sourdoughImg}
+              loading="eager"
+              decoding="auto"
+              densities={[1, 2]}
+            />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+

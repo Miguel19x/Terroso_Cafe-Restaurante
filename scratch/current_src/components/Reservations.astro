@@ -1,0 +1,255 @@
+---
+import { siteConfig } from '../data/site';
+---
+
+<section
+  id="reservas"
+  class="w-full bg-secondary text-on-secondary section-screen-fit section-divider relative overflow-hidden"
+>
+  <!-- Ambient background accents (contained in overflow-hidden to avoid scrollHeight inflation) -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div
+      class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-secondary-container/10 blur-3xl"
+    ></div>
+    <div
+      class="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-primary/20 blur-3xl"
+    ></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-gutter-mobile md:px-margin-tablet lg:px-margin relative z-10 w-full flex flex-col justify-center my-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-10 short:gap-4 ultra-short:gap-3 items-center">
+
+      <!-- Left Column: Narrative, Perks & Contacts (Desktop priority, condensed on mobile) -->
+      <div class="lg:col-span-6 flex flex-col justify-center text-center lg:text-left" data-animate="slide-right">
+        <div class="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 short:py-0.5 rounded-full bg-secondary-container/20 text-secondary-container font-label-md text-xs sm:text-sm uppercase tracking-wider mb-2 sm:mb-4 short:mb-1.5 ultra-short:mb-1 self-center lg:self-start border border-secondary-container/25 shadow-xs">
+          <span class="material-symbols-outlined text-[15px] sm:text-[17px] short:text-[14px]">table_restaurant</span>
+          <span>Mesa Garantizada · Sin Esperas</span>
+        </div>
+
+        <h2 class="font-serif font-bold text-xl sm:text-fluid-headline text-surface leading-tight mb-1.5 sm:mb-3 short:mb-1 ultra-short:mb-0.5">
+          ¿Te guardamos una mesa especial?
+        </h2>
+
+        <p class="font-body-md text-xs sm:text-base text-surface-container-high leading-relaxed short:leading-snug mb-3 sm:mb-6 short:mb-2 ultra-short:mb-1.5 max-w-xl hidden sm:block short:text-xs">
+          Ya sea para un desayuno tranquilo, un almuerzo de temporada o una tarde de café y lectura, tenemos un lugar cálido listo para ti en el corazón de Altamira.
+        </p>
+
+        <!-- Compact perks strip for small mobile -->
+        <div class="flex sm:hidden flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-[11px] text-surface-container-high mb-2 font-medium">
+          <span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-secondary-fixed">pets</span> Pet Friendly</span>
+          <span class="text-secondary-fixed-dim" aria-hidden="true">•</span>
+          <span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-secondary-fixed">schedule</span> 2h sin prisas</span>
+          <span class="text-secondary-fixed-dim" aria-hidden="true">•</span>
+          <span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-secondary-fixed">wifi</span> WiFi</span>
+        </div>
+
+        <!-- 4 Hospitality Perks Grid (Desktop & Tablet) -->
+        <div class="hidden sm:grid grid-cols-2 gap-3 sm:gap-4 short:gap-2 ultra-short:gap-1.5 mb-5 sm:mb-6 short:mb-2.5 ultra-short:mb-1.5 text-left">
+          <div class="flex items-start gap-3 short:gap-2 bg-secondary-container/10 p-2.5 sm:p-3.5 short:p-2 short:py-1.5 rounded-xl border border-secondary-container/15">
+            <span class="material-symbols-outlined text-secondary-fixed text-[19px] sm:text-[22px] short:text-[16px] shrink-0 mt-0.5">table_bar</span>
+            <div>
+              <p class="font-title-sm text-xs sm:text-sm short:text-xs font-semibold text-surface">Mesa reservada</p>
+              <p class="text-xs short:text-[11px] text-surface-container-high mt-0.5">2 horas completas sin prisas</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 short:gap-2 bg-secondary-container/10 p-2.5 sm:p-3.5 short:p-2 short:py-1.5 rounded-xl border border-secondary-container/15">
+            <span class="material-symbols-outlined text-secondary-fixed text-[19px] sm:text-[22px] short:text-[16px] shrink-0 mt-0.5">pets</span>
+            <div>
+              <p class="font-title-sm text-xs sm:text-sm short:text-xs font-semibold text-surface">Terraza Pet Friendly</p>
+              <p class="text-xs short:text-[11px] text-surface-container-high mt-0.5">Agua fresca y sombra botánica</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 short:gap-2 bg-secondary-container/10 p-2.5 sm:p-3.5 short:p-2 short:py-1.5 rounded-xl border border-secondary-container/15">
+            <span class="material-symbols-outlined text-secondary-fixed text-[19px] sm:text-[22px] short:text-[16px] shrink-0 mt-0.5">wifi</span>
+            <div>
+              <p class="font-title-sm text-xs sm:text-sm short:text-xs font-semibold text-surface">Espacio de café & trabajo</p>
+              <p class="text-xs short:text-[11px] text-surface-container-high mt-0.5">WiFi de alta velocidad y enchufes</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 short:gap-2 bg-secondary-container/10 p-2.5 sm:p-3.5 short:p-2 short:py-1.5 rounded-xl border border-secondary-container/15">
+            <span class="material-symbols-outlined text-secondary-fixed text-[19px] sm:text-[22px] short:text-[16px] shrink-0 mt-0.5">schedule</span>
+            <div>
+              <p class="font-title-sm text-xs sm:text-sm short:text-xs font-semibold text-surface">Horarios de atención</p>
+              <p class="text-xs short:text-[11px] text-surface-container-high mt-0.5 flex flex-wrap gap-x-1.5 gap-y-0.5">
+                <span class="whitespace-nowrap">{siteConfig.schedule.weekdays.shortDays}: {siteConfig.schedule.weekdays.opens}–{siteConfig.schedule.weekdays.closes}</span>
+                <span class="text-secondary-fixed/50 hidden sm:inline">·</span>
+                <span class="whitespace-nowrap">{siteConfig.schedule.weekends.shortDays}: {siteConfig.schedule.weekends.opens}–{siteConfig.schedule.weekends.closes}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Contacts Bar (Desktop) -->
+        <div class="pt-3 sm:pt-4 short:pt-1.5 border-t border-secondary-container/20 hidden lg:flex flex-wrap items-center gap-y-1 gap-x-4 text-surface-container-high text-xs sm:text-sm short:text-xs">
+          <a href={`tel:${siteConfig.contact.phoneRaw}`} class="inline-flex items-center gap-1.5 py-0.5 hover:text-surface transition-colors">
+            <span class="material-symbols-outlined text-primary-fixed text-[16px]">call</span>
+            <span>{siteConfig.contact.phoneDisplay}</span>
+          </a>
+          <span class="text-outline-variant/40 hidden sm:inline">•</span>
+          <a href={`mailto:${siteConfig.contact.email}`} class="inline-flex items-center gap-1.5 py-0.5 hover:text-surface transition-colors">
+            <span class="material-symbols-outlined text-primary-fixed text-[16px]">mail</span>
+            <span>{siteConfig.contact.email}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Booking Widget Card -->
+      <div class="lg:col-span-6" data-animate="slide-left">
+        <div class="bg-surface-container-lowest text-on-surface rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 lg:p-7 short:p-3.5 ultra-short:p-3 shadow-[0_20px_50px_-10px_rgba(17,31,8,0.35)] border border-outline-variant/20 relative">
+
+          <div class="mb-2 sm:mb-4 short:mb-1.5 ultra-short:mb-1">
+            <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-primary block mb-0.5">Reserva Directa</span>
+            <h3 class="font-serif font-bold text-base sm:text-xl short:text-base text-on-surface">Personaliza tu visita</h3>
+          </div>
+
+          <!-- Step 1: Comensales (Accessible Radio Group in Fieldset) -->
+          <fieldset class="mb-2.5 sm:mb-4 short:mb-1.5 ultra-short:mb-1 border-0 p-0 m-0">
+            <legend class="block text-[11px] sm:text-xs short:text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1 sm:mb-2 short:mb-0.5">
+              1. Número de personas
+            </legend>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2.5 short:gap-1.5">
+              <div>
+                <input type="radio" name="res-guests" id="guests-2" value="2 personas" class="sr-only peer res-radio-input" checked />
+                <label for="guests-2" class="min-h-11 short:min-h-8 flex items-center justify-center px-2 py-1.5 sm:px-3 sm:py-2 short:py-1 rounded-xl text-xs sm:text-sm short:text-xs font-semibold border border-outline-variant/30 bg-surface-container-low text-on-surface-variant peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary peer-checked:shadow-xs peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 hover:bg-surface-container-highest transition-all cursor-pointer text-center select-none">
+                  2 personas
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="res-guests" id="guests-4" value="3 a 4 personas" class="sr-only peer res-radio-input" />
+                <label for="guests-4" class="min-h-11 short:min-h-8 flex items-center justify-center px-2 py-1.5 sm:px-3 sm:py-2 short:py-1 rounded-xl text-xs sm:text-sm short:text-xs font-semibold border border-outline-variant/30 bg-surface-container-low text-on-surface-variant peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary peer-checked:shadow-xs peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 hover:bg-surface-container-highest transition-all cursor-pointer text-center select-none">
+                  3-4 personas
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="res-guests" id="guests-6" value="5 a 6 personas" class="sr-only peer res-radio-input" />
+                <label for="guests-6" class="min-h-11 short:min-h-8 flex items-center justify-center px-2 py-1.5 sm:px-3 sm:py-2 short:py-1 rounded-xl text-xs sm:text-sm short:text-xs font-semibold border border-outline-variant/30 bg-surface-container-low text-on-surface-variant peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary peer-checked:shadow-xs peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 hover:bg-surface-container-highest transition-all cursor-pointer text-center select-none">
+                  5-6 personas
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="res-guests" id="guests-7" value="grupo de 7 o más" class="sr-only peer res-radio-input" />
+                <label for="guests-7" class="min-h-11 short:min-h-8 flex items-center justify-center px-2 py-1.5 sm:px-3 sm:py-2 short:py-1 rounded-xl text-xs sm:text-sm short:text-xs font-semibold border border-outline-variant/30 bg-surface-container-low text-on-surface-variant peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary peer-checked:shadow-xs peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 hover:bg-surface-container-highest transition-all cursor-pointer text-center select-none">
+                  Grupo 7+
+                </label>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Step 2: Momento del día (Accessible Radio Group in Fieldset) -->
+          <fieldset class="mb-2.5 sm:mb-4 short:mb-1.5 ultra-short:mb-1 border-0 p-0 m-0">
+            <legend class="block text-[11px] sm:text-xs short:text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1 sm:mb-2 short:mb-0.5">
+              2. Momento del día
+            </legend>
+            <div class="grid grid-cols-3 gap-1.5 sm:gap-2.5 short:gap-1.5">
+              <div>
+                <input type="radio" name="res-time" id="time-brunch" value="Brunch & Desayuno" class="sr-only peer res-radio-input" checked />
+                <label for="time-brunch" class="min-h-11 short:min-h-8 flex items-center justify-center px-1.5 py-1.5 sm:px-2.5 sm:py-2 short:py-1 rounded-xl text-xs sm:text-sm short:text-xs font-semibold border border-outline-variant/30 bg-surface-container-low text-on-surface-variant peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary peer-checked:shadow-xs peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 hover:bg-surface-container-highest transition-all cursor-pointer text-center leading-tight select-none">
+                  Brunch
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="res-time" id="time-lunch" value="Almuerzo de temporada" class="sr-only peer res-radio-input" />
+                <label for="time-lunch" class="min-h-11 short:min-h-8 flex items-center justify-center px-1.5 py-1.5 sm:px-2.5 sm:py-2 short:py-1 rounded-xl text-xs sm:text-sm short:text-xs font-semibold border border-outline-variant/30 bg-surface-container-low text-on-surface-variant peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary peer-checked:shadow-xs peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 hover:bg-surface-container-highest transition-all cursor-pointer text-center leading-tight select-none">
+                  Almuerzo
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="res-time" id="time-afternoon" value="Café & Tarde" class="sr-only peer res-radio-input" />
+                <label for="time-afternoon" class="min-h-11 short:min-h-8 flex items-center justify-center px-1.5 py-1.5 sm:px-2.5 sm:py-2 short:py-1 rounded-xl text-xs sm:text-sm short:text-xs font-semibold border border-outline-variant/30 bg-surface-container-low text-on-surface-variant peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary peer-checked:shadow-xs peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 hover:bg-surface-container-highest transition-all cursor-pointer text-center leading-tight select-none">
+                  Café &amp; Tarde
+                </label>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Step 3: Espacio preferido (Accessible Radio Group in Fieldset) -->
+          <fieldset class="mb-3 sm:mb-4 short:mb-1.5 ultra-short:mb-1 border-0 p-0 m-0">
+            <legend class="block text-[11px] sm:text-xs short:text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1 sm:mb-2 short:mb-0.5">
+              3. Espacio preferido
+            </legend>
+            <div class="grid grid-cols-2 gap-1.5 sm:gap-2.5 short:gap-1.5">
+              <div>
+                <input type="radio" name="res-area" id="area-indoor" value="Salón Principal" class="sr-only peer res-radio-input" />
+                <label for="area-indoor" class="min-h-11 short:min-h-8 flex items-center justify-center px-2.5 py-1.5 sm:px-3.5 sm:py-2 short:py-1 rounded-xl text-xs sm:text-sm short:text-xs font-semibold border border-outline-variant/30 bg-surface-container-low text-on-surface-variant peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary peer-checked:shadow-xs peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 hover:bg-surface-container-highest transition-all cursor-pointer text-center select-none">
+                  Salón Interior
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="res-area" id="area-garden" value="Terraza Jardín" class="sr-only peer res-radio-input" checked />
+                <label for="area-garden" class="min-h-11 short:min-h-8 flex items-center justify-center px-2.5 py-1.5 sm:px-3.5 sm:py-2 short:py-1 rounded-xl text-xs sm:text-sm short:text-xs font-semibold border border-outline-variant/30 bg-surface-container-low text-on-surface-variant peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary peer-checked:shadow-xs peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 hover:bg-surface-container-highest transition-all cursor-pointer text-center select-none">
+                  Terraza Jardín
+                </label>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Main CTA Link with Interpolated WhatsApp Number -->
+          <a
+            id="res-whatsapp-link"
+            href={`https://wa.me/${siteConfig.contact.whatsappNumber}?text=${encodeURIComponent('Hola Terroso, quisiera reservar una mesa para 2 personas (Brunch & Desayuno) en Terraza Jardín.')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full inline-flex items-center justify-center gap-2 bg-primary text-on-primary font-title-md font-semibold text-xs sm:text-base short:text-xs min-h-11 sm:min-h-12 short:min-h-8.5 py-3 sm:py-3.5 short:py-2 px-4 sm:px-6 rounded-xl sm:rounded-2xl shadow-[0_12px_28px_-4px_rgba(154,64,28,0.4)] hover:bg-primary-container transition-all transform hover:-translate-y-0.5 active:scale-[0.98] group cursor-pointer text-center"
+          >
+            <span class="material-symbols-outlined text-[17px] sm:text-[22px] short:text-[16px]">chat</span>
+            <span>Confirmar Reserva por WhatsApp</span>
+            <span class="material-symbols-outlined text-[15px] sm:text-[18px] short:text-[15px] transform group-hover:translate-x-1 transition-transform">
+              arrow_forward
+            </span>
+          </a>
+
+          <!-- Helper note -->
+          <div class="mt-2 short:mt-1 flex items-center justify-center gap-1.5 text-[10px] sm:text-xs text-tertiary">
+            <span class="material-symbols-outlined text-[14px] sm:text-[16px] short:text-[13px] text-secondary">verified</span>
+            <span>Confirmación promedio en menos de 15 minutos</span>
+          </div>
+
+          <!-- Quick Contacts on Mobile -->
+          <div class="mt-2.5 pt-2 border-t border-outline-variant/20 flex lg:hidden items-center justify-center gap-4 text-[11px] text-tertiary">
+            <a href={`tel:${siteConfig.contact.phoneRaw}`} class="inline-flex items-center gap-1 text-primary hover:underline">
+              <span class="material-symbols-outlined text-[14px]">call</span>
+              <span>{siteConfig.contact.phoneDisplay}</span>
+            </a>
+            <span class="text-outline-variant/40">•</span>
+            <a href={`mailto:${siteConfig.contact.email}`} class="inline-flex items-center gap-1 text-primary hover:underline">
+              <span class="material-symbols-outlined text-[14px]">mail</span>
+              <span>Email</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  import { siteConfig } from '../data/site';
+
+  function setupReservationWidget() {
+    const whatsappLink = document.getElementById('res-whatsapp-link') as HTMLAnchorElement | null;
+    if (!whatsappLink) return;
+
+    function updateWhatsAppUrl() {
+      const selectedGuests = (document.querySelector('input[name="res-guests"]:checked') as HTMLInputElement)?.value || '2 personas';
+      const selectedTime = (document.querySelector('input[name="res-time"]:checked') as HTMLInputElement)?.value || 'Brunch & Desayuno';
+      const selectedArea = (document.querySelector('input[name="res-area"]:checked') as HTMLInputElement)?.value || 'Terraza Jardín';
+
+      const text = `Hola Terroso, quisiera reservar una mesa para ${selectedGuests} (${selectedTime}) en ${selectedArea}.`;
+      whatsappLink!.href = `https://wa.me/${siteConfig.contact.whatsappNumber}?text=${encodeURIComponent(text)}`;
+    }
+
+    document.querySelectorAll<HTMLInputElement>('.res-radio-input').forEach((input) => {
+      input.addEventListener('change', updateWhatsAppUrl);
+    });
+
+    updateWhatsAppUrl();
+  }
+
+  setupReservationWidget();
+  document.addEventListener('astro:page-load', setupReservationWidget);
+</script>
+

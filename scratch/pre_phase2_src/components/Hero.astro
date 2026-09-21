@@ -1,0 +1,199 @@
+---
+import { Image } from "astro:assets";
+import heroImg from "../assets/terroso-ambiente-hero.jpg";
+---
+
+<section
+  id="inicio"
+  class="relative w-full bg-surface-container overflow-x-clip min-h-[calc(100dvh-var(--header-height))] min-h-[calc(100svh-var(--header-height))] flex flex-col justify-between pt-1.5 sm:pt-3 md:pt-6 pb-0"
+>
+  <div
+    class="max-w-7xl mx-auto px-gutter-mobile md:px-margin-tablet lg:px-margin w-full flex flex-col justify-center grow py-1 sm:py-2 md:py-3"
+  >
+    <div
+      class="grid grid-cols-1 md:grid-cols-12 gap-y-3 sm:gap-y-5 md:gap-x-8 lg:gap-x-12 items-center"
+    >
+      <!-- Hero Text Column -->
+      <div
+        class="md:col-span-7 lg:col-span-6 flex flex-col items-start z-10"
+        data-animate="slide-right"
+      >
+        <div
+          class="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-surface-container-highest text-primary font-label-md text-[11px] sm:text-xs uppercase tracking-wider mb-2.5 sm:mb-4 shadow-xs"
+        >
+          <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          Café de Especialidad &amp; Masa Madre
+        </div>
+
+        <h1
+          class="font-display-lg text-fluid-hero text-on-surface tracking-tight mb-2 sm:mb-3 lg:mb-4"
+        >
+          <span>Sabores que</span><br />
+          <span class="text-primary italic font-serif"
+            >cuentan una historia</span
+          >
+          <span class="sr-only">
+            — Terroso Café de Especialidad &amp; Cocina de Origen en Altamira,
+            Caracas</span
+          >
+        </h1>
+
+        <p
+          class="font-body-md sm:font-body-lg text-tertiary max-w-xl mb-3 sm:mb-5 leading-relaxed text-sm sm:text-base lg:text-lg line-clamp-3 sm:line-clamp-none"
+        >
+          Ingredientes de origen local, panadería artesanal de masa madre y
+          granos de café seleccionados con pasión. Una pausa cálida en el
+          corazón de la ciudad.
+        </p>
+
+        <!-- CTAs: side-by-side on mobile and desktop to fit 1 screen without scrolling -->
+        <div
+          class="grid grid-cols-2 sm:flex sm:flex-row sm:flex-wrap gap-2.5 sm:gap-4 w-full sm:w-auto mb-3 sm:mb-5"
+        >
+          <a
+            href="#menu"
+            class="min-h-11 inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-primary text-on-primary font-label-lg text-xs sm:text-label-lg px-3 py-2.5 sm:px-8 sm:py-3.5 rounded-xl shadow-[0_12px_24px_-4px_rgba(154,64,28,0.3)] hover:bg-primary-container transition-all transform hover:-translate-y-0.5 active:scale-[0.98] text-center font-semibold"
+          >
+            <span class="material-symbols-outlined text-[18px] sm:text-[20px]"
+              >restaurant_menu</span
+            >
+            <span>Ver menú</span>
+          </a>
+          <a
+            href="#reservas"
+            class="min-h-11 inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-transparent text-secondary font-label-lg text-xs sm:text-label-lg px-3 py-2.5 sm:px-7 sm:py-3.5 rounded-xl shadow-[inset_0_0_0_2px_#536346] hover:bg-secondary hover:text-on-secondary transition-all transform hover:-translate-y-0.5 active:scale-[0.98] text-center font-semibold"
+          >
+            <span class="material-symbols-outlined text-[18px] sm:text-[20px]"
+              >calendar_today</span
+            >
+            <span>Reservar mesa</span>
+          </a>
+        </div>
+
+        <!-- Trust Micro Badges: single compact row on mobile -->
+        <div
+          class="flex flex-row flex-wrap items-center justify-between sm:justify-start gap-2 sm:gap-4 lg:gap-5 pt-2.5 sm:pt-4 border-t border-outline-variant/20 text-on-surface-variant font-label-md text-[11px] sm:text-xs w-full"
+        >
+          <div class="flex items-center gap-1.5">
+            <span
+              class="material-symbols-outlined text-primary text-[17px] sm:text-[19px] shrink-0"
+              >local_cafe</span
+            >
+            <span class="font-medium">Tueste semanal</span>
+          </div>
+          <div
+            class="w-1.5 h-1.5 rounded-full bg-outline-variant hidden sm:block"
+          >
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span
+              class="material-symbols-outlined text-secondary text-[17px] sm:text-[19px] shrink-0"
+              >bakery_dining</span
+            >
+            <span class="font-medium">Fermentación 48h</span>
+          </div>
+          <div
+            class="w-1.5 h-1.5 rounded-full bg-outline-variant hidden sm:block"
+          >
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span
+              class="material-symbols-outlined text-primary text-[17px] sm:text-[19px] shrink-0"
+              >nature_people</span
+            >
+            <span class="font-medium">100% Trazable</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Media Column -->
+      <div
+        class="md:col-span-5 lg:col-span-6 relative flex justify-center md:justify-end pb-1 md:pb-0"
+        data-animate="slide-left"
+      >
+        <div
+          class="relative w-full max-w-95 sm:max-w-120 md:max-w-none rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(43,33,26,0.18)] max-h-[min(22svh,210px)] sm:max-h-[min(32svh,280px)] md:max-h-[min(44svh,440px)] aspect-16/9 sm:aspect-4/3"
+        >
+          <Image
+            alt="Ambiente cálido de Terroso Café en Altamira, Caracas, con barra de café de especialidad, mesas rústicas y abundante vegetación"
+            class="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700 ease-out"
+            src={heroImg}
+            loading="eager"
+            fetchpriority="high"
+            densities={[1, 2]}
+          />
+          <div
+            class="absolute inset-0 bg-linear-to-t from-inverse-surface/30 via-transparent to-transparent pointer-events-none"
+          >
+          </div>
+        </div>
+
+        <!-- Floating Artisanal Badge -->
+        <div
+          class="absolute bottom-1.5 left-1.5 sm:bottom-3 sm:left-3 lg:bottom-4 lg:left-4 bg-surface-container-lowest/95 backdrop-blur-md px-2 py-1 sm:px-4 sm:py-3 rounded-xl sm:rounded-2xl shadow-[0_16px_36px_-6px_rgba(43,33,26,0.15)] flex items-center gap-1.5 sm:gap-2.5 z-20 max-w-[calc(100%-1rem)]"
+        >
+          <div
+            class="w-6 h-6 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-primary-fixed flex items-center justify-center text-primary shrink-0"
+          >
+            <span class="material-symbols-outlined text-[15px] sm:text-[22px]"
+              >verified</span
+            >
+          </div>
+          <div>
+            <p
+              class="font-label-md text-[9px] sm:text-xs text-primary tracking-wider uppercase font-semibold leading-tight"
+            >
+              Cosecha Seleccionada
+            </p>
+            <p
+              class="font-headline-sm text-[10px] sm:text-sm text-on-surface leading-tight"
+            >
+              Cocina de Origen
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Indicador de Scroll / Desliza hacia abajo (Visible en pantallas con altura suficiente) -->
+    <div
+      class="hidden md:flex flex-col items-center justify-center pt-2 sm:pt-3 pb-1 z-20 relative shrink-0"
+      data-animate="fade"
+    >
+      <a
+        href="#menu"
+        class="group inline-flex flex-col items-center gap-1 text-tertiary hover:text-primary transition-all duration-300 cursor-pointer select-none"
+        aria-label="Deslizar hacia abajo para explorar el menú y restaurante"
+      >
+        <span
+          class="font-label-sm text-[10px] uppercase tracking-[0.2em] font-semibold text-tertiary group-hover:text-primary transition-colors"
+        >
+          Desliza para explorar
+        </span>
+        <div
+          class="w-4 h-6 sm:w-5 sm:h-7 rounded-full border-2 border-primary/40 group-hover:border-primary flex items-start justify-center p-0.5 transition-all duration-300 bg-surface/80 backdrop-blur-xs shadow-xs group-hover:shadow-[0_4px_12px_rgba(154,64,28,0.15)] group-hover:-translate-y-0.5"
+        >
+          <div
+            class="w-1 h-1.5 bg-primary rounded-full animate-bounce"
+          >
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Wave Divider: conecta suavemente con la franja de origen -->
+  <div
+    class="w-full leading-none text-secondary overflow-hidden -mb-px shrink-0 mt-1 sm:mt-2"
+  >
+    <svg
+      class="relative block w-full h-4 sm:h-6 md:h-8 lg:h-10"
+      viewBox="0 0 1200 120"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z"
+        fill="currentColor"></path>
+    </svg>
+  </div>
+</section>

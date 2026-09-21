@@ -1,0 +1,406 @@
+---
+import { Image } from "astro:assets";
+import { galleryItems } from "../data/gallery";
+
+// Duplicamos los elementos para garantizar que el bucle cubra pantallas anchas (ultrawide / 4K)
+const baseItems =
+  galleryItems.length < 8 ? [...galleryItems, ...galleryItems] : galleryItems;
+---
+
+<section
+  id="galeria"
+  class="w-full bg-secondary text-on-secondary section-screen-fit section-divider overflow-hidden relative"
+>
+  <div
+    class="max-w-7xl mx-auto px-gutter-mobile md:px-margin-tablet lg:px-margin mb-2 sm:mb-3 w-full"
+  >
+    <div
+      class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2"
+      data-animate
+    >
+      <div>
+        <span
+          class="font-label-md text-xs sm:text-label-md tracking-widest text-primary-fixed uppercase block mb-1 sm:mb-1.5 font-semibold"
+        >
+          ATMÓSFERA &amp; EXPERIENCIA
+        </span>
+        <h2 class="font-headline-xl text-fluid-headline text-surface font-bold">
+          Momentos en Terroso
+        </h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carrusel: Bucle Continuo Infinito por Transform GPU -->
+  <div
+    id="gallery-viewport"
+    class="relative w-full overflow-hidden select-none grow flex flex-col justify-center cursor-grab active:cursor-grabbing py-2 sm:py-3.5 touch-pan-y"
+  >
+    <!-- Degradados laterales para difuminar los bordes -->
+    <div
+      class="pointer-events-none absolute left-0 top-0 bottom-0 hidden sm:block sm:w-28 md:w-36 bg-linear-to-r from-secondary via-secondary/80 to-transparent z-20"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-28 md:w-36 bg-linear-to-l from-secondary via-secondary/80 to-transparent z-20"
+    >
+    </div>
+
+    <!-- Delineado decorativo superior en gallery viewport -->
+    <div
+      class="w-full flex items-center justify-center gap-3 sm:gap-4 px-gutter-mobile mb-2 sm:mb-3 pointer-events-none select-none relative z-10"
+      aria-hidden="true"
+      data-animate
+      style="transition-delay: 150ms;"
+    >
+      <div
+        class="h-px grow max-w-xs sm:max-w-md lg:max-w-xl bg-linear-to-r from-transparent via-secondary-container/25 to-secondary-container/60"
+      >
+      </div>
+      <div
+        class="flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/10 border border-secondary-container/25 text-primary-fixed text-[10px] sm:text-xs tracking-widest uppercase font-medium shadow-xs backdrop-blur-xs"
+      >
+        <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed/80"></span>
+        <span
+          class="material-symbols-outlined text-[15px] sm:text-[17px] text-primary-fixed"
+          >potted_plant</span
+        >
+        <span>Salón Botánico &amp; Panadería</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed/80"></span>
+      </div>
+      <div
+        class="h-px grow max-w-xs sm:max-w-md lg:max-w-xl bg-linear-to-l from-transparent via-secondary-container/25 to-secondary-container/60"
+      >
+      </div>
+    </div>
+
+    <!-- Pista con translate3d continuo -->
+    <div
+      id="continuous-gallery-track"
+      class="flex gap-3.5 sm:gap-6 w-max will-change-transform py-1 sm:py-2 touch-pan-y"
+      style="transform: translate3d(0, 0, 0);"
+    >
+      <!-- Grupo A: Originales -->
+      <div
+        id="gallery-set-a"
+        class="flex items-stretch gap-3.5 sm:gap-6 shrink-0"
+      >
+        {
+          baseItems.map((item) => (
+            <article
+              draggable="false"
+              class="gallery-card w-[clamp(14rem,26vw,19.375rem)] shrink-0 bg-on-secondary-fixed/50 rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_12px_28px_-4px_rgba(17,31,8,0.3)] group/card relative transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-6px_rgba(17,31,8,0.5)] cursor-pointer"
+            >
+              <div class="relative h-[clamp(210px,48svh,450px)] overflow-hidden">
+                <Image
+                  alt={item.imageAlt}
+                  class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-700 pointer-events-none"
+                  src={item.image}
+                  loading="eager"
+                  decoding="auto"
+                  densities={[1, 2]}
+                  draggable="false"
+                />
+                <div class="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-between p-[clamp(0.75rem,1.8svh,1.5rem)] pointer-events-none">
+                  <div class="flex items-center">
+                    <span class="font-label-sm text-xs sm:text-[11px] text-primary-fixed uppercase tracking-widest px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10 font-semibold">
+                      {item.subtitle}
+                    </span>
+                  </div>
+                  <div class="min-w-0">
+                    <h3 class="font-headline-sm text-sm sm:text-headline-sm text-surface mb-1 drop-shadow-sm font-semibold leading-tight line-clamp-1 sm:line-clamp-none">
+                      {item.title}
+                    </h3>
+                    <p class="font-body-sm text-xs sm:text-body-sm text-surface-container-high/90 line-clamp-2 sm:line-clamp-none leading-snug">
+                      {item.imageAlt}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <!-- Grupo B: Clones exactos para bucle continuo infinito (aria-hidden) -->
+      <div
+        id="gallery-set-b"
+        class="flex items-stretch gap-3.5 sm:gap-6 shrink-0"
+        aria-hidden="true"
+      >
+        {
+          baseItems.map((item) => (
+            <article
+              draggable="false"
+              class="gallery-card w-[clamp(14rem,26vw,19.375rem)] shrink-0 bg-on-secondary-fixed/50 rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_12px_28px_-4px_rgba(17,31,8,0.3)] group/card relative transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-6px_rgba(17,31,8,0.5)] cursor-pointer"
+            >
+              <div class="relative h-[clamp(210px,48svh,450px)] overflow-hidden">
+                <Image
+                  alt={item.imageAlt}
+                  class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-700 pointer-events-none"
+                  src={item.image}
+                  loading="eager"
+                  decoding="auto"
+                  densities={[1, 2]}
+                  draggable="false"
+                />
+                <div class="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-between p-[clamp(0.75rem,1.8svh,1.5rem)] pointer-events-none">
+                  <div class="flex items-center">
+                    <span class="font-label-sm text-xs sm:text-[11px] text-primary-fixed uppercase tracking-widest px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10 font-semibold">
+                      {item.subtitle}
+                    </span>
+                  </div>
+                  <div class="min-w-0">
+                    <h3 class="font-headline-sm text-sm sm:text-headline-sm text-surface mb-1 drop-shadow-sm font-semibold leading-tight line-clamp-1 sm:line-clamp-none">
+                      {item.title}
+                    </h3>
+                    <p class="font-body-sm text-xs sm:text-body-sm text-surface-container-high/90 line-clamp-2 sm:line-clamp-none leading-snug">
+                      {item.imageAlt}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Delineado decorativo inferior en gallery viewport -->
+    <div
+      class="w-full flex items-center justify-center gap-3 sm:gap-4 px-gutter-mobile mt-2 sm:mt-3 pointer-events-none select-none relative z-10"
+      aria-hidden="true"
+      data-animate
+      style="transition-delay: 280ms;"
+    >
+      <div
+        class="h-px grow max-w-xs sm:max-w-md lg:max-w-xl bg-linear-to-r from-transparent via-secondary-container/20 to-secondary-container/45"
+      >
+      </div>
+      <div
+        class="flex items-center gap-2 text-secondary-container/80 text-[10px] sm:text-xs tracking-wider uppercase font-medium"
+      >
+        <span
+          class="material-symbols-outlined text-[14px] text-primary-fixed/80 animate-swipe-nudge inline-block"
+          >swipe</span
+        >
+        <span>Arrastra o desliza para explorar</span>
+      </div>
+      <div
+        class="h-px grow max-w-xs sm:max-w-md lg:max-w-xl bg-linear-to-l from-transparent via-secondary-container/20 to-secondary-container/45"
+      >
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  let activeAnimationId: number | null = null;
+
+  function initContinuousGallery(): void {
+    if (activeAnimationId !== null) {
+      cancelAnimationFrame(activeAnimationId);
+      activeAnimationId = null;
+    }
+
+    const viewport = document.getElementById("gallery-viewport");
+    const track = document.getElementById("continuous-gallery-track");
+    const setA = document.getElementById("gallery-set-a");
+
+    if (!viewport || !track || !setA) return;
+
+    let isHovered = false;
+    let isPointerDown = false;
+    let isTouchActive = false;
+    let isDragging = false;
+    let isHorizontalSwipe = false;
+    let startX = 0;
+    let startY = 0;
+    let startOffset = 0;
+    let currentX = 0;
+    let lastTime = performance.now();
+
+    // Velocidad constante suave (~55px/s)
+    const baseSpeed = 55;
+
+    function getLoopWidth(): number {
+      // El ancho del grupo A más el gap exacto entre grupos
+      return setA!.offsetWidth + (window.innerWidth >= 640 ? 24 : 14);
+    }
+
+    function render(x: number) {
+      track!.style.transform = `translate3d(${-x}px, 0, 0)`;
+    }
+
+    function animate(currentTime: number): void {
+      const elapsed = (currentTime - lastTime) / 1000;
+      lastTime = currentTime;
+
+      // Prevenir saltos bruscos tras inactividad o cambio de pestaña
+      const deltaSeconds = Math.min(elapsed, 0.1);
+
+      if (!isHovered && !isPointerDown && !isTouchActive && !document.hidden) {
+        currentX += baseSpeed * deltaSeconds;
+
+        const loopWidth = getLoopWidth();
+        if (loopWidth > 0) {
+          if (currentX >= loopWidth) {
+            currentX -= loopWidth;
+          } else if (currentX < 0) {
+            currentX += loopWidth;
+          }
+        }
+
+        render(currentX);
+      }
+
+      activeAnimationId = requestAnimationFrame(animate);
+    }
+
+    activeAnimationId = requestAnimationFrame(animate);
+
+    // ── Soporte Táctil Móvil (Parar al tocar, arrastrar y deslizar) ──────────
+    viewport.addEventListener(
+      "touchstart",
+      (e: TouchEvent) => {
+        if (e.touches.length !== 1) return;
+        isTouchActive = true;
+        isDragging = false;
+        isHorizontalSwipe = false;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        startOffset = currentX;
+      },
+      { passive: true }
+    );
+
+    viewport.addEventListener(
+      "touchmove",
+      (e: TouchEvent) => {
+        if (!isTouchActive || e.touches.length !== 1) return;
+
+        const touch = e.touches[0];
+        const diffX = touch.clientX - startX;
+        const diffY = touch.clientY - startY;
+
+        // Determinar si el gesto es intencionalmente horizontal
+        if (!isHorizontalSwipe && !isDragging) {
+          if (Math.abs(diffX) > 6 && Math.abs(diffX) > Math.abs(diffY)) {
+            isHorizontalSwipe = true;
+            isDragging = true;
+          } else if (Math.abs(diffY) > 8) {
+            // Es un scroll vertical de página, liberar para no interferir
+            isTouchActive = false;
+            return;
+          }
+        }
+
+        if (isDragging) {
+          if (e.cancelable) {
+            e.preventDefault(); // Prevenir conflicto con navegación por gestos del navegador
+          }
+
+          let target = startOffset - diffX;
+          const loopWidth = getLoopWidth();
+          if (loopWidth > 0) {
+            while (target >= loopWidth) {
+              target -= loopWidth;
+              startOffset -= loopWidth;
+            }
+            while (target < 0) {
+              target += loopWidth;
+              startOffset += loopWidth;
+            }
+          }
+          currentX = target;
+          render(currentX);
+        }
+      },
+      { passive: false }
+    );
+
+    const onTouchRelease = () => {
+      if (isTouchActive || isDragging) {
+        isTouchActive = false;
+        isDragging = false;
+        isHorizontalSwipe = false;
+        lastTime = performance.now();
+      }
+    };
+
+    viewport.addEventListener("touchend", onTouchRelease, { passive: true });
+    viewport.addEventListener("touchcancel", onTouchRelease, { passive: true });
+
+    // ── Soporte Escritorio / Ratón (Pausar al hover y arrastre con mouse) ────
+    viewport.addEventListener("pointerenter", (e: PointerEvent) => {
+      if (e.pointerType === "mouse") {
+        isHovered = true;
+      }
+    });
+
+    viewport.addEventListener("pointerleave", (e: PointerEvent) => {
+      if (e.pointerType === "mouse") {
+        isHovered = false;
+        lastTime = performance.now();
+      }
+    });
+
+    viewport.addEventListener("pointerdown", (e: PointerEvent) => {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+
+      isPointerDown = true;
+      isDragging = false;
+      startX = e.clientX;
+      startOffset = currentX;
+    });
+
+    window.addEventListener(
+      "pointermove",
+      (e: PointerEvent) => {
+        if (!isPointerDown || e.pointerType !== "mouse") return;
+
+        const diffX = e.clientX - startX;
+        if (Math.abs(diffX) > 4) {
+          isDragging = true;
+        }
+
+        if (isDragging) {
+          let target = startOffset - diffX;
+          const loopWidth = getLoopWidth();
+          if (loopWidth > 0) {
+            while (target >= loopWidth) {
+              target -= loopWidth;
+              startOffset -= loopWidth;
+            }
+            while (target < 0) {
+              target += loopWidth;
+              startOffset += loopWidth;
+            }
+          }
+          currentX = target;
+          render(currentX);
+        }
+      },
+      { passive: true }
+    );
+
+    const onPointerRelease = (e: PointerEvent) => {
+      if (isPointerDown && e.pointerType === "mouse") {
+        isPointerDown = false;
+        isDragging = false;
+        lastTime = performance.now();
+      }
+    };
+
+    window.addEventListener("pointerup", onPointerRelease);
+    window.addEventListener("pointercancel", onPointerRelease);
+  }
+
+  // Inicializar al cargar el DOM o en transiciones de página
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initContinuousGallery);
+  } else {
+    initContinuousGallery();
+  }
+  document.addEventListener("astro:page-load", initContinuousGallery);
+</script>

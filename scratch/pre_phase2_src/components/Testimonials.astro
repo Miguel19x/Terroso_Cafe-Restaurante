@@ -1,0 +1,114 @@
+---
+import { testimonials } from '../data/testimonials';
+import { formatNumber, formatRating } from '../utils/format';
+---
+
+<section id="testimonios" class="w-full bg-surface-container-high/40 border-t border-outline-variant/20 section-screen-fit section-divider">
+  <div class="max-w-7xl mx-auto px-gutter-mobile md:px-margin-tablet lg:px-margin w-full flex flex-col justify-center my-auto gap-2 sm:gap-3.5 lg:gap-5">
+
+    <!-- Section Header -->
+    <div class="text-center max-w-2xl mx-auto mb-2 sm:mb-3.5 lg:mb-5" data-animate>
+      <!-- Trust Rating Badge -->
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant/30 text-[10px] sm:text-xs text-secondary font-semibold mb-1.5 sm:mb-2.5 shadow-xs">
+        <div class="flex text-primary">
+          {[1, 2, 3, 4, 5].map(() => (
+            <span class="material-symbols-outlined material-symbols-fill text-[13px] sm:text-[15px] text-primary">star</span>
+          ))}
+        </div>
+        <span class="text-on-surface/80">{formatRating(4.9)} / 5 · Más de {formatNumber(1200)} reseñas en sala</span>
+      </div>
+
+      <span class="font-label-md text-xs sm:text-label-md tracking-widest text-primary uppercase block mb-1 sm:mb-1.5 font-semibold">
+        VOCES DE NUESTRA COMUNIDAD
+      </span>
+      <h2 class="font-headline-xl text-fluid-headline text-on-surface font-bold tracking-tight mb-1 sm:mb-2">
+        Palabras de quienes nos visitan
+      </h2>
+      <p class="font-body-md text-xs sm:text-sm md:text-body-md text-tertiary max-w-lg mx-auto leading-relaxed line-clamp-2 sm:line-clamp-none">
+        Historias cotidianas, pausas conscientes y momentos compartidos alrededor de una mesa viva y un café recién servido.
+      </p>
+    </div>
+
+    <!-- 3 Testimonials: Horizontal scroll-snap Carousel on Mobile with Peek, 3 Columns on Desktop -->
+    <div class="flex md:grid md:grid-cols-3 gap-3.5 sm:gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory -mx-gutter-mobile px-gutter-mobile ps-gutter-mobile pe-gutter-mobile [scroll-padding-inline:1.25rem] md:[scroll-padding-inline:0] md:mx-0 md:px-0 pb-2 md:pb-0 items-center">
+      {testimonials.map((t, i) => {
+        const initials = t.name.split(' ').map((n) => n[0]).join('').slice(0, 2);
+        return (
+          <div
+            class="w-[82vw] max-w-85 md:w-auto shrink-0 md:shrink snap-start md:snap-align-none relative bg-surface-container-lowest p-4 sm:p-5 lg:p-6 rounded-2xl border border-outline-variant/30 hover:border-primary/40 shadow-[0_4px_20px_-2px_rgba(43,33,26,0.05)] hover:shadow-[0_16px_36px_-4px_rgba(43,33,26,0.12)] transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between group overflow-hidden h-full"
+            data-animate
+            style={`transition-delay: ${i * 90}ms`}
+          >
+            <!-- Watermark decorative quote mark -->
+            <span class="material-symbols-outlined absolute -top-1 -right-1 text-primary/10 text-5xl sm:text-7xl select-none pointer-events-none group-hover:text-primary/20 transition-colors duration-300" aria-hidden="true">
+              format_quote
+            </span>
+
+            <div class="relative z-10 flex flex-col grow">
+              <!-- Top Row: 5 Stars Rating & Verified Badge -->
+              <div class="flex items-center justify-between gap-2 mb-2.5 sm:mb-4">
+                <div class="flex items-center gap-0.5 text-primary" role="img" aria-label="Calificación de 5 estrellas">
+                  {[1, 2, 3, 4, 5].map(() => (
+                    <span class="material-symbols-outlined material-symbols-fill text-[15px] sm:text-[18px] text-primary">star</span>
+                  ))}
+                </div>
+                {t.verified && (
+                  <span class="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-secondary bg-secondary/10 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full">
+                    <span class="material-symbols-outlined text-[13px] sm:text-[14px]">verified</span>
+                    Visita verificada
+                  </span>
+                )}
+              </div>
+
+              <!-- Quote content: Full review without cutoffs -->
+              <blockquote class="font-serif italic text-on-surface/90 text-xs sm:text-sm lg:text-base leading-relaxed mb-3 sm:mb-4 grow line-clamp-3 sm:line-clamp-none">
+                “{t.quote}”
+              </blockquote>
+
+              <!-- Dish Favorite Tag -->
+              {t.dishFavorite && (
+                <div class="mb-3 sm:mb-4 inline-flex items-center gap-1 text-[11px] sm:text-xs text-primary font-medium bg-primary/5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg border border-primary/10 self-start">
+                  <span class="material-symbols-outlined text-[14px] sm:text-[15px]">restaurant</span>
+                  <span>{t.dishFavorite}</span>
+                </div>
+              )}
+            </div>
+
+            <!-- Author info -->
+            <div class="pt-2.5 sm:pt-4 border-t border-outline-variant/20 flex items-center gap-2.5 sm:gap-3 relative z-10">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 text-primary font-serif font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 border border-primary/20">
+                {initials}
+              </div>
+              <div>
+                <p class="font-title-md text-xs sm:text-sm text-on-surface font-semibold leading-tight">{t.name}</p>
+                <p class="font-body-sm text-[11px] sm:text-xs text-tertiary mt-0.5">{t.role}</p>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Community Feedback Strip -->
+    <div
+      class="mt-2.5 sm:mt-4 lg:mt-6 pt-2.5 sm:pt-4 border-t border-outline-variant/20 flex flex-wrap items-center justify-center gap-2.5 sm:gap-6 text-center text-secondary font-label-md text-[11px] sm:text-xs shrink-0"
+      data-animate
+    >
+      <div class="flex items-center gap-1">
+        <span class="material-symbols-outlined text-primary text-[15px] sm:text-[17px]">recommend</span>
+        <span class="text-on-surface/80">98% de satisfacción</span>
+      </div>
+      <div class="w-1.5 h-1.5 rounded-full bg-outline-variant/40 hidden sm:block"></div>
+      <div class="flex items-center gap-1">
+        <span class="material-symbols-outlined text-primary text-[15px] sm:text-[17px]">rate_review</span>
+        <span class="text-on-surface/80">1.200+ reseñas verificadas</span>
+      </div>
+      <div class="w-1.5 h-1.5 rounded-full bg-outline-variant/40 hidden sm:block"></div>
+      <div class="flex items-center gap-1">
+        <span class="material-symbols-outlined text-primary text-[15px] sm:text-[17px]">volunteer_activism</span>
+        <span class="text-on-surface/80">Servicio cercano en Altamira</span>
+      </div>
+    </div>
+  </div>
+</section>
+

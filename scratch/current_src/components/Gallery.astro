@@ -1,0 +1,329 @@
+---
+import { Image } from "astro:assets";
+import { galleryItems } from "../data/gallery";
+
+// Duplicar elementos para un bucle continuo fluido en cualquier tamaño de pantalla
+const baseItems = galleryItems.length < 8 ? [...galleryItems, ...galleryItems] : galleryItems;
+---
+
+<section
+  id="galeria"
+  class="w-full bg-secondary text-on-secondary section-screen-fit section-divider overflow-hidden relative"
+>
+  <div
+    class="max-w-7xl mx-auto px-gutter-mobile md:px-margin-tablet lg:px-margin mb-2 sm:mb-4"
+  >
+    <div data-animate>
+      <span
+        class="font-label-md text-xs sm:text-label-md tracking-widest text-primary-fixed uppercase block mb-1 sm:mb-1.5 font-semibold"
+      >
+        ATMÓSFERA &amp; EXPERIENCIA
+      </span>
+      <h2
+        class="font-headline-xl text-fluid-headline text-surface font-bold"
+      >
+        Momentos en Terroso
+      </h2>
+    </div>
+  </div>
+
+  <!-- Carrusel: Bucle Continuo Infinito y Suave -->
+  <div class="relative w-full overflow-hidden select-none grow flex flex-col justify-center">
+    <!-- Degradados laterales: en móvil sólo en el borde derecho para no tapar el inicio -->
+    <div
+      class="pointer-events-none absolute left-0 top-0 bottom-0 hidden sm:block sm:w-28 md:w-36 bg-linear-to-r from-secondary via-secondary/80 to-transparent z-20"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute right-0 top-0 bottom-0 w-10 sm:w-28 md:w-36 bg-linear-to-l from-secondary via-secondary/80 to-transparent z-20"
+    >
+    </div>
+
+    <!-- Pista: snap-none para evitar saltos contra el auto-scroll, drag y rotación continua -->
+    <div
+      id="continuous-gallery-track"
+      class="flex gap-3.5 sm:gap-6 overflow-x-auto no-scrollbar py-1 sm:py-3 px-gutter-mobile md:px-0 ps-gutter-mobile pe-gutter-mobile snap-none cursor-grab"
+      style="scrollbar-width: none; -ms-overflow-style: none;"
+    >
+      <!-- Grupo 1: Elementos originales -->
+      <div
+        id="gallery-set-a"
+        class="flex items-stretch gap-3.5 sm:gap-6 short:gap-3 ultra-short:gap-2.5 shrink-0"
+      >
+        {
+          baseItems.map((item) => (
+            <article class="gallery-card w-[78vw] max-w-72 sm:w-67.5 md:w-72.5 lg:w-77.5 short:w-60 ultra-short:w-52 shrink-0 bg-on-secondary-fixed/50 rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_12px_28px_-4px_rgba(17,31,8,0.3)] group/card relative transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-6px_rgba(17,31,8,0.5)] cursor-pointer">
+              <div class="relative h-[46svh] max-h-95 min-h-65 sm:h-100 md:h-107.5 lg:h-115 short:h-64 short:min-h-0 short:max-h-64 ultra-short:h-48 ultra-short:min-h-0 ultra-short:max-h-48 overflow-hidden">
+                <Image
+                  alt={item.imageAlt}
+                  class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-700 pointer-events-none"
+                  src={item.image}
+                  loading="lazy"
+                  decoding="async"
+                  densities={[1, 2]}
+                />
+                <div class="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-between p-3.5 sm:p-6 short:p-3 ultra-short:p-2.5 pointer-events-none">
+                  <div class="flex items-center">
+                    <span class="font-label-sm text-xs sm:text-[11px] text-primary-fixed uppercase tracking-widest px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10 font-semibold">
+                      {item.subtitle}
+                    </span>
+                  </div>
+                  <div class="min-w-0">
+                    <h3 class="font-headline-sm text-sm sm:text-headline-sm short:text-sm text-surface mb-1 drop-shadow-sm font-semibold leading-tight line-clamp-1 sm:line-clamp-none">
+                      {item.title}
+                    </h3>
+                    <p class="font-body-sm text-xs sm:text-body-sm short:text-xs text-surface-container-high/90 line-clamp-2 sm:line-clamp-none leading-snug">
+                      {item.imageAlt}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <!-- Grupo 2: Clones exactos para bucle continuo infinito (aria-hidden) -->
+      <div
+        id="gallery-set-b"
+        class="flex items-stretch gap-3.5 sm:gap-6 short:gap-3 ultra-short:gap-2.5 shrink-0"
+        aria-hidden="true"
+      >
+        {
+          baseItems.map((item) => (
+            <article class="gallery-card w-[78vw] max-w-72 sm:w-67.5 md:w-72.5 lg:w-77.5 short:w-60 ultra-short:w-52 shrink-0 bg-on-secondary-fixed/50 rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_12px_28px_-4px_rgba(17,31,8,0.3)] group/card relative transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-6px_rgba(17,31,8,0.5)] cursor-pointer">
+              <div class="relative h-[46svh] max-h-95 min-h-65 sm:h-100 md:h-107.5 lg:h-115 short:h-64 short:min-h-0 short:max-h-64 ultra-short:h-48 ultra-short:min-h-0 ultra-short:max-h-48 overflow-hidden">
+                <Image
+                  alt={item.imageAlt}
+                  class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-700 pointer-events-none"
+                  src={item.image}
+                  loading="lazy"
+                  decoding="async"
+                  densities={[1, 2]}
+                />
+                <div class="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-between p-3.5 sm:p-6 short:p-3 ultra-short:p-2.5 pointer-events-none">
+                  <div class="flex items-center">
+                    <span class="font-label-sm text-xs sm:text-[11px] text-primary-fixed uppercase tracking-widest px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10 font-semibold">
+                      {item.subtitle}
+                    </span>
+                  </div>
+                  <div class="min-w-0">
+                    <h3 class="font-headline-sm text-sm sm:text-headline-sm short:text-sm text-surface mb-1 drop-shadow-sm font-semibold leading-tight line-clamp-1 sm:line-clamp-none">
+                      {item.title}
+                    </h3>
+                    <p class="font-body-sm text-xs sm:text-body-sm short:text-xs text-surface-container-high/90 line-clamp-2 sm:line-clamp-none leading-snug">
+                      {item.imageAlt}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #continuous-gallery-track {
+    scroll-behavior: auto !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  #continuous-gallery-track::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  let activeAnimationId: number | null = null;
+
+  function initContinuousGallery(): void {
+    if (activeAnimationId !== null) {
+      cancelAnimationFrame(activeAnimationId);
+      activeAnimationId = null;
+    }
+
+    const track = document.getElementById("continuous-gallery-track") as HTMLElement | null;
+    const setA = document.getElementById("gallery-set-a") as HTMLElement | null;
+    const setB = document.getElementById("gallery-set-b") as HTMLElement | null;
+    if (!track || !setA || !setB) return;
+
+    // Respeto silencioso a prefers-reduced-motion: si el usuario prefiere no movimiento, no se auto-scroll
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    let isHovered = false;
+    let isPointerDown = false;
+    let isDragging = false;
+    let startX = 0;
+    let startScroll = 0;
+
+    // Acumular la posición con números decimales para evitar que pantallas 1x redondeen a 0
+    let scrollPos = track.scrollLeft;
+    let lastTime = performance.now();
+
+    // Velocidad de rotación constante: ~48px por segundo (suave, pausada y legible)
+    const speed = 48;
+
+    function getLoopDistance(): number {
+      return setB!.offsetLeft - setA!.offsetLeft;
+    }
+
+    function animate(currentTime: number): void {
+      const elapsed = (currentTime - lastTime) / 1000;
+      lastTime = currentTime;
+
+      // Limitar deltaSeconds para evitar saltos si el usuario cambia de pestaña
+      const deltaSeconds = Math.min(elapsed, 0.1);
+
+      if (!isHovered && !isPointerDown && !isDragging) {
+        scrollPos += speed * deltaSeconds;
+
+        const loopDist = getLoopDistance();
+        if (loopDist > 0) {
+          // Bucle infinito continuo sin saltos visibles
+          if (scrollPos >= loopDist) {
+            scrollPos -= loopDist;
+          } else if (scrollPos < 0) {
+            scrollPos += loopDist;
+          }
+        }
+
+        track!.scrollLeft = scrollPos;
+      }
+
+      activeAnimationId = requestAnimationFrame(animate);
+    }
+
+    activeAnimationId = requestAnimationFrame(animate);
+
+    // Sincronizar scrollPos cuando el usuario desplaza manualmente
+    track.addEventListener(
+      "scroll",
+      () => {
+        if (isPointerDown || isDragging) {
+          scrollPos = track.scrollLeft;
+        }
+      },
+      { passive: true },
+    );
+
+    // ── Escritorio: Pausar SOLO con hover de ratón ─────────────────────────
+    track.addEventListener("pointerenter", (e: PointerEvent) => {
+      if (e.pointerType === "mouse") {
+        isHovered = true;
+      }
+    });
+
+    track.addEventListener("pointerleave", (e: PointerEvent) => {
+      if (e.pointerType === "mouse") {
+        isHovered = false;
+        // Al salir el ratón, retomar desde la posición actual
+        scrollPos = track.scrollLeft;
+      }
+    });
+
+    // ── Puntero / Táctil: pointerdown detiene, pointerup reanuda ───────────
+    track.addEventListener("pointerdown", (e: PointerEvent) => {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+
+      isPointerDown = true;
+      isDragging = false;
+      startX = e.clientX;
+      startScroll = track.scrollLeft;
+      scrollPos = track.scrollLeft;
+    });
+
+    window.addEventListener(
+      "pointermove",
+      (e: PointerEvent) => {
+        if (!isPointerDown) return;
+
+        // Arrastre con ratón en escritorio
+        if (e.pointerType === "mouse") {
+          const diffX = e.clientX - startX;
+          if (Math.abs(diffX) > 4) {
+            isDragging = true;
+            track.classList.add("cursor-grabbing");
+            track.classList.remove("cursor-grab");
+          }
+
+          if (isDragging) {
+            let targetScroll = startScroll - diffX;
+            const loopDist = getLoopDistance();
+            if (loopDist > 0) {
+              while (targetScroll >= loopDist) {
+                targetScroll -= loopDist;
+                startScroll -= loopDist;
+              }
+              while (targetScroll < 0) {
+                targetScroll += loopDist;
+                startScroll += loopDist;
+              }
+            }
+            scrollPos = targetScroll;
+            track.scrollLeft = scrollPos;
+          }
+        }
+      },
+      { passive: true },
+    );
+
+    const onPointerRelease = () => {
+      if (isPointerDown) {
+        isPointerDown = false;
+        isDragging = false;
+        scrollPos = track.scrollLeft;
+        track.classList.remove("cursor-grabbing");
+        track.classList.add("cursor-grab");
+      }
+    };
+
+    window.addEventListener("pointerup", onPointerRelease);
+    window.addEventListener("pointercancel", onPointerRelease);
+
+    // Soporte táctil explícito para teléfonos móviles
+    track.addEventListener(
+      "touchstart",
+      () => {
+        isPointerDown = true;
+        scrollPos = track.scrollLeft;
+      },
+      { passive: true },
+    );
+
+    window.addEventListener(
+      "touchend",
+      () => {
+        if (isPointerDown) {
+          isPointerDown = false;
+          scrollPos = track.scrollLeft;
+        }
+      },
+      { passive: true },
+    );
+
+    window.addEventListener(
+      "touchcancel",
+      () => {
+        if (isPointerDown) {
+          isPointerDown = false;
+          scrollPos = track.scrollLeft;
+        }
+      },
+      { passive: true },
+    );
+  }
+
+  // Inicializar en DOMContentLoaded y en transiciones de página de Astro
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initContinuousGallery);
+  } else {
+    initContinuousGallery();
+  }
+  document.addEventListener("astro:page-load", initContinuousGallery);
+</script>

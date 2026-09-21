@@ -1,0 +1,1 @@
+import{t as e}from"./site.C19zkazr.js";function t(){let t=document.getElementById(`infostrip-today-schedule`);if(!t)return;let{formattedHours:n}=e();t.textContent=`Hoy: ${n}`}t(),document.addEventListener(`astro:page-load`,t);

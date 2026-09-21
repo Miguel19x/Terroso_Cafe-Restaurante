@@ -1,0 +1,259 @@
+---
+import { testimonials } from '../data/testimonials';
+import { formatNumber, formatRating } from '../utils/format';
+---
+
+<section id="testimonios" class="w-full bg-surface-container-high/40 border-t border-outline-variant/20 section-screen-fit section-divider">
+  <div class="max-w-7xl mx-auto px-gutter-mobile md:px-margin-tablet lg:px-margin w-full flex flex-col justify-center my-auto gap-2 sm:gap-3.5 lg:gap-5 short:gap-1.5 ultra-short:gap-1">
+
+    <!-- Section Header -->
+    <div class="text-center max-w-2xl mx-auto mb-2 sm:mb-3.5 short:mb-1.5 ultra-short:mb-1" data-animate>
+      <!-- Trust Rating Badge -->
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 short:py-0.5 rounded-full bg-surface-container-lowest border border-outline-variant/30 text-[10px] sm:text-xs text-secondary font-semibold mb-1.5 short:mb-1 shadow-xs">
+        <div class="flex text-primary">
+          {[1, 2, 3, 4, 5].map(() => (
+            <span class="material-symbols-outlined material-symbols-fill text-[13px] sm:text-[14px] text-primary">star</span>
+          ))}
+        </div>
+        <span class="text-on-surface/80">{formatRating(4.9)} / 5 · Más de {formatNumber(1200)} reseñas</span>
+      </div>
+
+      <span class="font-label-md text-xs sm:text-label-md tracking-widest text-primary uppercase block mb-1 short:mb-0.5 font-semibold">
+        VOCES DE NUESTRA COMUNIDAD
+      </span>
+      <h2 class="font-headline-xl text-fluid-headline text-on-surface font-bold tracking-tight mb-1 short:mb-0.5">
+        Palabras de quienes nos visitan
+      </h2>
+      <p class="font-body-md text-xs sm:text-sm md:text-body-md text-tertiary max-w-lg mx-auto leading-relaxed short:text-xs short:leading-snug ultra-short:line-clamp-1 line-clamp-2 sm:line-clamp-none">
+        Historias cotidianas, pausas conscientes y momentos compartidos alrededor de una mesa viva y un café recién servido.
+      </p>
+    </div>
+
+    <!-- Testimonials Container: 3 Columns on tall desktop (md+ and >680px height), Accessible Carousel on short screens and mobile -->
+    <div class="relative w-full max-w-5xl mx-auto">
+      <div
+        id="testimonials-track"
+        class="flex md:grid md:grid-cols-3 short:flex short:overflow-x-auto gap-3.5 sm:gap-6 short:gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory md:snap-none short:snap-x short:snap-mandatory pb-2 md:pb-0 short:pb-1 items-stretch"
+        tabindex="0"
+        role="region"
+        aria-label="Carrusel de testimonios"
+      >
+        {testimonials.map((t, i) => {
+          const initials = t.name.split(' ').map((n) => n[0]).join('').slice(0, 2);
+          return (
+            <div
+              class="testimonial-card w-[82vw] max-w-85 md:w-auto short:w-full short:max-w-xl short:mx-auto shrink-0 md:shrink short:shrink-0 snap-center md:snap-align-none short:snap-center relative bg-surface-container-lowest p-4 sm:p-5 lg:p-6 short:p-3.5 ultra-short:p-3 rounded-2xl border border-outline-variant/30 hover:border-primary/40 shadow-[0_4px_20px_-2px_rgba(43,33,26,0.05)] hover:shadow-[0_16px_36px_-4px_rgba(43,33,26,0.12)] transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between group overflow-hidden"
+              data-testimonial-index={i}
+              data-animate
+              style={`transition-delay: ${i * 90}ms`}
+            >
+              <!-- Watermark decorative quote mark -->
+              <span class="material-symbols-outlined absolute -top-1 -right-1 text-primary/10 text-5xl sm:text-7xl short:hidden select-none pointer-events-none group-hover:text-primary/20 transition-colors duration-300" aria-hidden="true">
+                format_quote
+              </span>
+
+              <div class="relative z-10 flex flex-col grow">
+                <!-- Top Row: 5 Stars Rating & Verified Badge -->
+                <div class="flex items-center justify-between gap-2 mb-2 sm:mb-3 short:mb-1.5 ultra-short:mb-1">
+                  <div class="flex items-center gap-0.5 text-primary" role="img" aria-label="Calificación de 5 estrellas">
+                    {[1, 2, 3, 4, 5].map(() => (
+                      <span class="material-symbols-outlined material-symbols-fill text-[14px] sm:text-[17px] text-primary">star</span>
+                    ))}
+                  </div>
+                  {t.verified && (
+                    <span class="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-secondary bg-secondary/10 px-2 py-0.5 sm:px-2.5 sm:py-1 short:py-0.5 rounded-full">
+                      <span class="material-symbols-outlined text-[13px] sm:text-[14px]">verified</span>
+                      Visita verificada
+                    </span>
+                  )}
+                </div>
+
+                <!-- Quote content -->
+                <blockquote class="font-serif italic text-on-surface/90 text-xs sm:text-sm lg:text-base short:text-xs leading-relaxed short:leading-snug mb-2 sm:mb-3 short:mb-1.5 ultra-short:mb-1 grow line-clamp-3 sm:line-clamp-none short:line-clamp-3">
+                  “{t.quote}”
+                </blockquote>
+
+                <!-- Dish Favorite Tag -->
+                {t.dishFavorite && (
+                  <div class="mb-2 sm:mb-3 short:mb-1.5 ultra-short:mb-1 inline-flex items-center gap-1 text-[11px] sm:text-xs short:text-[10px] text-primary font-medium bg-primary/5 px-2 py-0.5 sm:px-2.5 sm:py-1 short:py-0.5 rounded-lg border border-primary/10 self-start">
+                    <span class="material-symbols-outlined text-[14px] sm:text-[15px]">restaurant</span>
+                    <span>{t.dishFavorite}</span>
+                  </div>
+                )}
+              </div>
+
+              <!-- Author info -->
+              <div class="pt-2 sm:pt-3 short:pt-1.5 ultra-short:pt-1 border-t border-outline-variant/20 flex items-center gap-2.5 sm:gap-3 relative z-10">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 short:w-7 short:h-7 rounded-full bg-primary/10 text-primary font-serif font-bold text-xs sm:text-sm short:text-xs flex items-center justify-center shrink-0 border border-primary/20">
+                  {initials}
+                </div>
+                <div>
+                  <p class="font-title-md text-xs sm:text-sm text-on-surface font-semibold leading-tight">{t.name}</p>
+                  <p class="font-body-sm text-[11px] sm:text-xs short:text-[10px] text-tertiary mt-0.5">{t.role}</p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Accessible Carousel Navigation Controls (Visible on short screens & mobile, hidden on tall desktop) -->
+      <div
+        id="testimonials-controls"
+        class="flex md:hidden short:md:flex items-center justify-center gap-3 pt-2 short:pt-1.5 ultra-short:pt-1"
+        role="toolbar"
+        aria-label="Controles del carrusel de testimonios"
+      >
+        <button
+          type="button"
+          id="testimonial-prev-btn"
+          aria-label="Testimonio anterior"
+          class="w-8 h-8 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface hover:text-primary hover:border-primary/40 flex items-center justify-center transition-all cursor-pointer active:scale-95 shadow-xs"
+        >
+          <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+        </button>
+
+        <!-- Dot Indicators -->
+        <div
+          role="tablist"
+          aria-label="Selector de testimonios"
+          class="flex items-center gap-1.5"
+        >
+          {testimonials.map((_, i) => (
+            <button
+              type="button"
+              role="tab"
+              id={`testimonial-dot-${i}`}
+              aria-selected={i === 0 ? "true" : "false"}
+              aria-label={`Ver testimonio ${i + 1} de ${testimonials.length}`}
+              data-dot-index={i}
+              class={`testimonial-dot h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                i === 0 ? "w-6 bg-primary" : "w-2.5 bg-outline-variant/40 hover:bg-outline-variant"
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          id="testimonial-next-btn"
+          aria-label="Testimonio siguiente"
+          class="w-8 h-8 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface hover:text-primary hover:border-primary/40 flex items-center justify-center transition-all cursor-pointer active:scale-95 shadow-xs"
+        >
+          <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Community Feedback Strip (Hidden on ultra-short to ensure generous breathing) -->
+    <div
+      class="mt-2 sm:mt-3 short:mt-1 pt-2 short:pt-1 border-t border-outline-variant/20 flex flex-wrap items-center justify-center gap-2.5 sm:gap-6 text-center text-secondary font-label-md text-[11px] sm:text-xs ultra-short:hidden shrink-0"
+      data-animate
+    >
+      <div class="flex items-center gap-1">
+        <span class="material-symbols-outlined text-primary text-[15px] sm:text-[17px]">recommend</span>
+        <span class="text-on-surface/80">98% de satisfacción</span>
+      </div>
+      <div class="w-1.5 h-1.5 rounded-full bg-outline-variant/40 hidden sm:block"></div>
+      <div class="flex items-center gap-1">
+        <span class="material-symbols-outlined text-primary text-[15px] sm:text-[17px]">rate_review</span>
+        <span class="text-on-surface/80">1.200+ reseñas verificadas</span>
+      </div>
+      <div class="w-1.5 h-1.5 rounded-full bg-outline-variant/40 hidden sm:block"></div>
+      <div class="flex items-center gap-1">
+        <span class="material-symbols-outlined text-primary text-[15px] sm:text-[17px]">volunteer_activism</span>
+        <span class="text-on-surface/80">Servicio cercano en Altamira</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupTestimonialsCarousel() {
+    const track = document.getElementById("testimonials-track");
+    const prevBtn = document.getElementById("testimonial-prev-btn");
+    const nextBtn = document.getElementById("testimonial-next-btn");
+    const dots = document.querySelectorAll<HTMLButtonElement>(".testimonial-dot");
+    const cards = document.querySelectorAll<HTMLElement>(".testimonial-card");
+
+    if (!track || cards.length === 0) return;
+
+    let currentIndex = 0;
+
+    function updateDots(index: number) {
+      dots.forEach((dot, i) => {
+        const isSelected = i === index;
+        dot.setAttribute("aria-selected", isSelected ? "true" : "false");
+        if (isSelected) {
+          dot.classList.add("w-6", "bg-primary");
+          dot.classList.remove("w-2.5", "bg-outline-variant/40");
+        } else {
+          dot.classList.remove("w-6", "bg-primary");
+          dot.classList.add("w-2.5", "bg-outline-variant/40");
+        }
+      });
+      currentIndex = index;
+    }
+
+    function scrollToIndex(index: number) {
+      if (index < 0) index = cards.length - 1;
+      if (index >= cards.length) index = 0;
+      const targetCard = cards[index];
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        updateDots(index);
+      }
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => scrollToIndex(currentIndex - 1));
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => scrollToIndex(currentIndex + 1));
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const targetIdx = parseInt(dot.getAttribute("data-dot-index") || "0", 10);
+        scrollToIndex(targetIdx);
+      });
+    });
+
+    // Keyboard arrow navigation
+    track.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        scrollToIndex(currentIndex - 1);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        scrollToIndex(currentIndex + 1);
+      }
+    });
+
+    // Scroll listener to update active dot when user swipes
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+    track.addEventListener("scroll", () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const trackRect = track.getBoundingClientRect();
+        const trackCenter = trackRect.left + trackRect.width / 2;
+        let closestIndex = 0;
+        let minDiff = Infinity;
+        cards.forEach((card, i) => {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter = cardRect.left + cardRect.width / 2;
+          const diff = Math.abs(trackCenter - cardCenter);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIndex = i;
+          }
+        });
+        updateDots(closestIndex);
+      }, 80);
+    }, { passive: true });
+  }
+
+  setupTestimonialsCarousel();
+  document.addEventListener("astro:page-load", setupTestimonialsCarousel);
+</script>
+

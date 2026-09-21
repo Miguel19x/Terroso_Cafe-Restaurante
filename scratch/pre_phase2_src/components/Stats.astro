@@ -1,0 +1,81 @@
+---
+import { statsSectionData, stats } from '../data/stats';
+---
+
+<section id="cifras" class="w-full bg-surface-container-low/50 section-screen-fit section-divider border-y border-outline-variant/20">
+  <div class="max-w-7xl mx-auto px-gutter-mobile md:px-margin-tablet lg:px-margin w-full flex flex-col justify-center my-auto gap-2.5 sm:gap-4 lg:gap-6">
+
+    <!-- Section Header -->
+    <div class="text-center max-w-2xl mx-auto mb-2 sm:mb-4 lg:mb-6" data-animate>
+      <span class="font-label-md text-xs sm:text-sm tracking-widest text-primary uppercase block mb-1 sm:mb-2 font-semibold">
+        {statsSectionData.tagline}
+      </span>
+      <h2 class="font-headline-xl text-fluid-headline text-on-surface font-bold tracking-tight mb-1 sm:mb-2">
+        {statsSectionData.title}
+      </h2>
+      <p class="font-body-md text-xs sm:text-sm md:text-body-md text-tertiary max-w-lg mx-auto leading-relaxed">
+        {statsSectionData.description}
+      </p>
+    </div>
+
+    <!-- 4 Stats Cards: 2x2 Grid on Mobile, 4 Columns on Desktop -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-8 items-center">
+      {stats.map((stat, i) => (
+        <div
+          class="relative overflow-hidden bg-surface-container-lowest border border-outline-variant/30 hover:border-primary/40 p-3 sm:p-5 lg:p-7 rounded-2xl shadow-[0_4px_20px_-2px_rgba(43,33,26,0.06)] hover:shadow-[0_16px_36px_-4px_rgba(43,33,26,0.12)] transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between group h-full"
+          data-animate
+          style={`transition-delay: ${i * 80}ms`}
+        >
+          <!-- Watermark decorative icon -->
+          <span class="material-symbols-outlined absolute -bottom-2 -right-2 text-primary/5 group-hover:text-primary/10 text-5xl sm:text-6xl lg:text-8xl pointer-events-none select-none transition-colors duration-300 leading-none" aria-hidden="true">
+            {stat.icon}
+          </span>
+
+          <div class="relative z-10">
+            <!-- Top Header: Icon & Category Label -->
+            <div class="flex items-center justify-between mb-2 sm:mb-3 gap-1.5">
+              <div
+                class={`w-7 h-7 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-lg sm:rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105 shadow-xs shrink-0 ${
+                  stat.accent === 'primary'
+                    ? 'bg-primary/10 text-primary border border-primary/20'
+                    : 'bg-secondary/15 text-secondary border border-secondary/20'
+                }`}
+              >
+                <span class="material-symbols-outlined text-[16px] sm:text-[20px] lg:text-[24px]">{stat.icon}</span>
+              </div>
+              <span class="text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-secondary bg-secondary/10 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full border border-secondary/15 whitespace-nowrap">
+                {stat.label}
+              </span>
+            </div>
+
+            <!-- Main Counter -->
+            <span
+              class="font-serif font-bold text-2xl sm:text-3xl lg:text-[44px] text-on-surface group-hover:text-primary transition-colors block mb-1 sm:mb-2 tracking-tight leading-none"
+              data-counter={stat.numericTarget}
+              data-suffix={stat.suffix}
+            >
+              {stat.value}
+            </span>
+
+            <!-- Description -->
+            <p class="font-body-sm text-[11px] sm:text-xs lg:text-sm text-tertiary leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none">
+              {stat.description}
+            </p>
+          </div>
+
+          <!-- Subtle bottom accent bar expanding on hover -->
+          <div class="relative z-10 h-0.5 sm:h-1 w-6 sm:w-12 group-hover:w-full rounded-full bg-linear-to-r from-primary to-secondary transition-all duration-500 mt-2 sm:mt-4 opacity-60 group-hover:opacity-100"></div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Verification Footnote -->
+    <div class="mt-2.5 sm:mt-4 lg:mt-6 text-center text-xs text-tertiary shrink-0" data-animate>
+      <p class="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant/20 shadow-xs text-[10px] sm:text-xs">
+        <span class="material-symbols-outlined text-[14px] sm:text-[16px] text-secondary">verified_user</span>
+        <span>{statsSectionData.footnote}</span>
+      </p>
+    </div>
+  </div>
+</section>
+

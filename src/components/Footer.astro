@@ -1,0 +1,200 @@
+---
+import { Image } from 'astro:assets';
+import logoImg from '../assets/logo.png';
+import { siteConfig } from '../data/site';
+
+const footerNav = [
+  { label: 'Menú de Temporada', href: '#menu' },
+  { label: 'Galería & Espacio', href: '#galeria' },
+  { label: 'Cifras & Trayectoria', href: '#cifras' },
+  { label: 'Nuestra Historia', href: '#historia' },
+  { label: 'Voces de la Comunidad', href: '#testimonios' },
+  { label: 'Reservar Mesa', href: '#reservas' },
+];
+---
+
+<footer class="w-full bg-inverse-surface text-inverse-on-surface section-divider relative overflow-hidden border-t border-surface-container-highest/20 py-10 sm:py-12">
+  <!-- Subtle background ambient glow (contained in overflow-hidden) -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-primary/10 blur-3xl"></div>
+  </div>
+
+  <div class="w-full max-w-7xl mx-auto px-gutter-mobile md:px-margin-tablet lg:px-margin relative z-10 flex flex-col">
+    <!-- Main 4-Column Grid: 2 columns on mobile, 4 columns on desktop -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-8 pb-6 sm:pb-8 border-b border-surface-container-highest/20 items-center">
+
+      <!-- Column 1: Brand & Philosophy (lg:col-span-4) -->
+      <div class="lg:col-span-4 space-y-2.5 sm:space-y-4">
+        <a href="#inicio" class="inline-flex items-center gap-2.5 group" aria-label="Volver al inicio">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-surface-container-lowest/10 p-1 flex items-center justify-center border border-surface-container-lowest/15 group-hover:scale-105 transition-transform duration-300">
+            <Image
+              alt="Terroso Logo"
+              class="w-full h-full object-contain"
+              src={logoImg}
+              width={80}
+              height={80}
+              loading="lazy"
+              decoding="auto"
+              densities={[1, 2]}
+            />
+          </div>
+          <div>
+            <span class="font-serif font-bold text-xl sm:text-2xl text-inverse-on-surface group-hover:text-primary-fixed transition-colors block leading-none">
+              Terroso
+            </span>
+            <span class="text-[10px] sm:text-[11px] uppercase tracking-widest text-primary-fixed font-semibold">
+              Café &amp; Cocina de Origen
+            </span>
+          </div>
+        </a>
+
+        <p class="font-body-sm text-xs sm:text-body-sm text-surface-container-high/90 max-w-sm leading-relaxed line-clamp-2 sm:line-clamp-none">
+          Honrando el oficio invisible de los caficultores de los Andes venezolanos, el reposo paciente de la masa madre y los encuentros cotidianos sin prisas en Altamira.
+        </p>
+
+        <!-- Venue Identity Badges -->
+        <div class="pt-1 flex flex-wrap items-center gap-2 text-xs text-secondary-fixed">
+          <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container-highest/15 border border-surface-container-highest/25 text-[11px] sm:text-xs">
+            <span class="material-symbols-outlined text-[14px] text-primary-fixed">local_cafe</span>
+            Café de Finca Directa
+          </span>
+          <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container-highest/15 border border-surface-container-highest/25 text-[11px] sm:text-xs">
+            <span class="material-symbols-outlined text-[14px] text-primary-fixed">deck</span>
+            Terraza Pet Friendly
+          </span>
+        </div>
+      </div>
+
+      <!-- Column 2: Navigation (lg:col-span-2, hidden on small mobile to avoid overflow) -->
+      <div class="lg:col-span-2 hidden sm:block">
+        <h4 class="font-serif font-bold text-base sm:text-lg text-primary-fixed mb-2 sm:mb-3">Explorar</h4>
+        <ul class="space-y-1 sm:space-y-1.5 font-body-sm text-xs sm:text-body-sm">
+          {footerNav.map((link) => (
+            <li>
+              <a
+                class="text-surface-container-high hover:text-primary-fixed transition-colors inline-block py-0.5 hover:translate-x-1 transform duration-200"
+                href={link.href}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Column 3: Hours & Service Status (lg:col-span-3) -->
+      <div class="lg:col-span-3 space-y-2 sm:space-y-2.5">
+        <h4 class="font-serif font-bold text-sm sm:text-lg text-primary-fixed mb-1 sm:mb-2">Horarios</h4>
+
+        <div class="space-y-1.5 font-body-sm text-xs sm:text-body-sm text-surface-container-high/90">
+          <div>
+            <span class="font-semibold block text-[11px] sm:text-xs uppercase tracking-wider text-surface">
+              {siteConfig.schedule.weekdays.days}
+            </span>
+            <span class="text-surface-container-highest whitespace-nowrap text-xs">{siteConfig.schedule.weekdays.formatted}</span>
+          </div>
+
+          <div>
+            <span class="font-semibold block text-[11px] sm:text-xs uppercase tracking-wider text-surface">
+              {siteConfig.schedule.weekends.days}
+            </span>
+            <span class="text-surface-container-highest whitespace-nowrap text-xs">{siteConfig.schedule.weekends.formatted}</span>
+          </div>
+        </div>
+
+        <!-- Open Status Badge -->
+        <div class="pt-0.5">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-950/70 text-emerald-300 text-[11px] sm:text-xs font-semibold border border-emerald-800/50">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Abierto todos los días
+          </span>
+        </div>
+      </div>
+
+      <!-- Column 4: Visit & Direct Actions (lg:col-span-3) -->
+      <div class="lg:col-span-3 space-y-2 sm:space-y-2.5">
+        <h4 class="font-serif font-bold text-sm sm:text-lg text-primary-fixed mb-1 sm:mb-2">Visítanos</h4>
+
+        <address class="not-italic space-y-0.5 font-body-sm text-xs sm:text-body-sm text-surface-container-high/90">
+          <p class="font-semibold text-surface">{siteConfig.address.neighborhood}, {siteConfig.address.city}</p>
+          <p class="text-surface-container-highest text-[11px] sm:text-xs">{siteConfig.address.street}</p>
+        </address>
+
+        <!-- Google Maps Direct Button -->
+        <div>
+          <a
+            href={siteConfig.address.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 py-0.5 text-xs font-semibold text-primary-fixed hover:text-surface underline underline-offset-4 transition-colors"
+          >
+            <span class="material-symbols-outlined text-[15px]">pin_drop</span>
+            <span>Ver en Google Maps</span>
+          </a>
+        </div>
+
+        <!-- Social Channels & Direct Contact -->
+        <div class="pt-1 flex flex-wrap items-center gap-2">
+          <a
+            class="w-11 h-11 rounded-xl bg-surface-container-highest/20 flex items-center justify-center text-primary-fixed hover:bg-primary hover:text-on-primary transition-all active:scale-95 border border-surface-container-highest/20 shadow-xs"
+            href={siteConfig.contact.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram de Terroso"
+            title="Instagram"
+          >
+            <span class="material-symbols-outlined text-[19px]">photo_camera</span>
+          </a>
+
+          <a
+            class="w-11 h-11 rounded-xl bg-surface-container-highest/20 flex items-center justify-center text-primary-fixed hover:bg-primary hover:text-on-primary transition-all active:scale-95 border border-surface-container-highest/20 shadow-xs"
+            href={`https://wa.me/${siteConfig.contact.whatsappNumber}?text=${encodeURIComponent(siteConfig.contact.whatsappDefaultMessage)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp de Terroso"
+            title="WhatsApp"
+          >
+            <span class="material-symbols-outlined text-[19px]">chat</span>
+          </a>
+
+          <a
+            class="w-11 h-11 rounded-xl bg-surface-container-highest/20 flex items-center justify-center text-primary-fixed hover:bg-primary hover:text-on-primary transition-all active:scale-95 border border-surface-container-highest/20 shadow-xs"
+            href={`tel:${siteConfig.contact.phoneRaw}`}
+            aria-label="Llamar a Terroso"
+            title="Teléfono"
+          >
+            <span class="material-symbols-outlined text-[19px]">call</span>
+          </a>
+
+          <button
+            type="button"
+            class="w-11 h-11 rounded-xl bg-surface-container-highest/20 flex items-center justify-center text-primary-fixed hover:bg-primary hover:text-on-primary transition-all cursor-pointer active:scale-95 border border-surface-container-highest/20 shadow-xs"
+            aria-label="Compartir Terroso"
+            title="Compartir página"
+            onclick="if (navigator.share) { navigator.share({ title: 'Terroso Café & Restaurante', url: window.location.href }); } else { navigator.clipboard?.writeText(window.location.href); }"
+          >
+            <span class="material-symbols-outlined text-[17px]">share</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar: Copyright, Legal & Back to Top -->
+    <div class="pt-4 sm:pt-6 flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4 text-[11px] sm:text-xs text-surface-container-highest shrink-0">
+      <p class="text-center sm:text-left leading-tight">
+        © {new Date().getFullYear()} {siteConfig.name}. {siteConfig.address.neighborhood}, {siteConfig.address.city}.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-1 sm:gap-4">
+        <a class="min-h-11 inline-flex items-center px-2 py-1 hover:text-primary-fixed transition-colors" href="#inicio">Privacidad</a>
+        <a class="min-h-11 inline-flex items-center px-2 py-1 hover:text-primary-fixed transition-colors" href="#inicio">Términos</a>
+        <a class="min-h-11 inline-flex items-center gap-1 px-2 py-1 hover:text-primary-fixed transition-colors font-semibold text-primary-fixed" href="#inicio">
+          <span>Subir</span>
+          <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
